@@ -15,6 +15,7 @@ namespace ApplicationService
 		public InventoryService(IUnitOfWork unitOfWork) 
 		{
 			_unitOfWork = unitOfWork;
+			//sadad
 		}
 		public async Task<bool> InsertEquipment(Equipment Equipment)
 		{
