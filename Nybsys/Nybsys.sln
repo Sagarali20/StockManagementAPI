@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NybsysApi", "NybsysApi", "{57C8F5D3-23DD-4F93-BEF6-6CF63F276FE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nybsys.Api", "Nybsys.Api\Nybsys.Api.csproj", "{A25C6FE4-64DF-404F-9D53-6DE673165A4A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NybsysDataAccess", "NybsysDataAccess", "{4F4D6EFB-6B3E-4E8F-932B-8863E79EF426}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseContext", "DatabaseContext", "{2E2FB72C-D62A-4A9A-9D97-4D02FC27B9D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EntityModels", "EntityModels", "{3DA95F22-3539-4F29-8183-D934685EFA59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nybsys.DataAccess", "Nybsys.DataAccess\Nybsys.DataAccess.csproj", "{67C0F0C9-A2FA-4E7D-A5CD-50D7A1663A14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nybsys.EntityModels", "Nybsys.EntityModels\Nybsys.EntityModels.csproj", "{49B33673-AC68-49D9-A74B-66B139E472D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseContext", "DatabaseContext\DatabaseContext.csproj", "{094D03F4-6995-448B-AD94-C28468FD7C40}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A25C6FE4-64DF-404F-9D53-6DE673165A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A25C6FE4-64DF-404F-9D53-6DE673165A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A25C6FE4-64DF-404F-9D53-6DE673165A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A25C6FE4-64DF-404F-9D53-6DE673165A4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67C0F0C9-A2FA-4E7D-A5CD-50D7A1663A14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67C0F0C9-A2FA-4E7D-A5CD-50D7A1663A14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67C0F0C9-A2FA-4E7D-A5CD-50D7A1663A14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67C0F0C9-A2FA-4E7D-A5CD-50D7A1663A14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49B33673-AC68-49D9-A74B-66B139E472D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49B33673-AC68-49D9-A74B-66B139E472D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49B33673-AC68-49D9-A74B-66B139E472D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49B33673-AC68-49D9-A74B-66B139E472D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{094D03F4-6995-448B-AD94-C28468FD7C40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{094D03F4-6995-448B-AD94-C28468FD7C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{094D03F4-6995-448B-AD94-C28468FD7C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{094D03F4-6995-448B-AD94-C28468FD7C40}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A25C6FE4-64DF-404F-9D53-6DE673165A4A} = {57C8F5D3-23DD-4F93-BEF6-6CF63F276FE2}
+		{67C0F0C9-A2FA-4E7D-A5CD-50D7A1663A14} = {4F4D6EFB-6B3E-4E8F-932B-8863E79EF426}
+		{49B33673-AC68-49D9-A74B-66B139E472D6} = {3DA95F22-3539-4F29-8183-D934685EFA59}
+		{094D03F4-6995-448B-AD94-C28468FD7C40} = {2E2FB72C-D62A-4A9A-9D97-4D02FC27B9D4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ED3DD0B1-1CF9-4FD4-8E8E-DD9A6BB8DA45}
+	EndGlobalSection
+EndGlobal
