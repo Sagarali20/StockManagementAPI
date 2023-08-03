@@ -6,7 +6,9 @@ using Nybsys.EntityModels;
 namespace Nybsys.Api.Controllers
 {
 
-	[Route("api/[controller]")]
+
+	[Route("api/inventory")]
+
 	[ApiController]
 	public class InventoryController : ControllerBase
 	{
@@ -17,12 +19,14 @@ namespace Nybsys.Api.Controllers
 
 		}
 		[HttpGet]
+		[Route("getall-equipment")]
 		public async Task<IActionResult> Get()
 		{
 			return Ok(await _inventoryService.GetAllEquipment());
 		}
 
-		[HttpGet("{id}")]
+		[HttpPost]
+		[Route("get-equipment-by-id")]
 		public async Task<IActionResult> Get(int id)
 		{
 			var model = await _inventoryService.GetEquipmentById(id);
@@ -34,19 +38,40 @@ namespace Nybsys.Api.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Addderiver([FromBody] Equipment value)
+		[Route("add-equipment")]
+
+		public async Task<IActionResult> AddEquipment([FromBody] Equipment value)
 		{
-			value.EquipmentId = Guid.NewGuid();
-			value.CreatedDate= DateTime.UtcNow ;
-			value.LastUpdatedDate= DateTime.UtcNow ;
-			value.CreatedBy= new Guid();
-			value.LastUpdatedBy= new Guid();
+			bool result = false;
 
+			if(value !=null)
+			{
+				if (value.Id > 0)
+				{
 
-			bool re = await _inventoryService.InsertEquipment(value);
-			return Ok();
+				}
+				else
+				{
+					value.EquipmentId = Guid.NewGuid();
+					value.CreatedDate = DateTime.UtcNow;
+					value.LastUpdatedDate = DateTime.UtcNow;
+					value.CreatedBy = new Guid();
+					value.LastUpdatedBy = new Guid();
+					result = await _inventoryService.InsertEquipment(value);
+
+				}
+			}
+
+			var res = new
+			{
+				result = result,
+				model = value
+			};
+
+			return Ok(res);
 
 		}
+
 
 		[HttpPatch()]
 		public async Task<IActionResult> UpdateDeriver(Equipment Equipment)
@@ -79,7 +104,60 @@ namespace Nybsys.Api.Controllers
 			}
 			await _inventoryService.DeleteEquipment(model);
 			return Ok();
-
 		}
+
+
+		[HttpPost("category")]
+		public async Task<IActionResult> Category([FromBody] Category value)
+		{
+			bool result = false;
+			value.CategoryId = Guid.NewGuid();
+			result = await _inventoryService.InsertCategory(value);
+
+			var model = new
+			{
+				result = result
+			};
+
+			return Ok(model);
+		}
+		[HttpGet("getallcategory")]
+		public async Task<IActionResult> GetAllCategory()
+		{
+			var allCategory = await _inventoryService.GetAllCategory();
+
+			return Ok(new { category = allCategory });
+		}
+
+		[HttpPost("{id}")]
+		public async Task<IActionResult> DeleteCategory(int id)
+		{
+
+			bool result = false;
+
+			var Category = await _inventoryService.GetCategoryById(id);
+			if (Category == null)
+			{
+				return NotFound();
+
+			}
+			result = await _inventoryService.DeleteCategory(Category);
+
+			var model = new { 		
+				result = result 
+			};
+			return Ok(model);
+		}
+
+		[HttpGet()]
+		[Route("GetAllCategory-2")]
+		public async Task<IActionResult> GetAllCategory2()
+		{
+			var allCategory = await _inventoryService.GetAllCategory();
+
+			return Ok(new { category = allCategory });
+		}
+
+
 	}
 }

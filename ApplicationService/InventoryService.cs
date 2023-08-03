@@ -21,6 +21,10 @@ namespace ApplicationService
 		{
 			return await _unitOfWork.Equipment.Add(Equipment);
 		}
+		public async Task<bool> InsertCategory(Category Category)
+		{
+			return await _unitOfWork.Category.Add(Category);
+		}
 		public async Task<bool> UpdateEquipment(Equipment Equipment)
 		{
 			return await _unitOfWork.Equipment.Update(Equipment);
@@ -33,6 +37,21 @@ namespace ApplicationService
 		{
 			var dr = await _unitOfWork.Equipment.GetAll();
 			return dr.ToList();
+		}
+		public async Task<List<Category>> GetAllCategory()
+		{
+			var model = await _unitOfWork.Category.GetAll();
+			return model.ToList();
+		}
+
+		public async Task<bool> DeleteCategory(Category Category)
+		{
+			return await _unitOfWork.Category.Delete(Category);
+		}
+
+		public async Task<Category?> GetCategoryById(int id)
+		{
+			return await _unitOfWork.Category.GetById(id);
 		}
 		public async Task<Equipment?> GetEquipmentById(int id)
 		{
