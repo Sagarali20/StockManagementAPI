@@ -39,6 +39,9 @@ namespace Nybsys.EntityModels
 		public DateTime CreatedDate { get; set; }
 		public DateTime LastUpdatedDate { get; set; }
 		public Guid LastUpdatedBy { get; set; }
-	
+		[NotMapped]
+		public string CategoryName { get; set; }
+
+
 	}
 }

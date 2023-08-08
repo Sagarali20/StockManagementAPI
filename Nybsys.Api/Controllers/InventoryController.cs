@@ -22,7 +22,8 @@ namespace Nybsys.Api.Controllers
 		[Route("getall-equipment")]
 		public async Task<IActionResult> Get()
 		{
-			return Ok(await _inventoryService.GetAllEquipment());
+		  var equipment  =await _inventoryService.GetAllEquipment();
+			return Ok(new { equipment = equipment });
 		}
 
 		[HttpPost]
@@ -70,6 +71,24 @@ namespace Nybsys.Api.Controllers
 
 			return Ok(res);
 
+		}
+
+		[HttpPost]
+		[Route("delete-equipment")]
+		public async Task<IActionResult> DeleteEquipment(int id)
+		{
+			bool result = false;
+			var model = await _inventoryService.GetEquipmentById(id);
+			if (model == null)
+			{
+				return NotFound();
+			}
+			result= await _inventoryService.DeleteEquipment(model);
+			var res = new
+			{
+				result = result
+			};
+			return Ok(res);
 		}
 
 

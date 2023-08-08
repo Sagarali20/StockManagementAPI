@@ -23,7 +23,14 @@ namespace Nybsys.DataAccess.Repository
 		{
 			return await _dbContext.Equipments.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 		}
-
+		//public override async Task<Equipment?> GetAll()
+		//{
+		//	var equipmentWithCategories = await _dbContext.Equipments
+		//				.Include(e => e.Category) // Include the related Category
+		//				.ToListAsync();
+		//	return equipmentWithCategories;
+		//}
+     
 
 		public List<Equipment> GetAllEquipment()
 		{
