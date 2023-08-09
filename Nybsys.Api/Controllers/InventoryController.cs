@@ -49,6 +49,10 @@ namespace Nybsys.Api.Controllers
 			{
 				if (value.Id > 0)
 				{
+					value.LastUpdatedDate = DateTime.UtcNow;
+					value.LastUpdatedBy = new Guid();
+
+					result = await _inventoryService.UpdateEquipment(value);
 
 				}
 				else
