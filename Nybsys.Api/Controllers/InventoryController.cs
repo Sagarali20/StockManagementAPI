@@ -1,7 +1,10 @@
 ﻿using ApplicationService;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Nybsys.DataAccess.Contracts2;
 using Nybsys.EntityModels;
+using System.Data;
+using System.Xml;
 
 namespace Nybsys.Api.Controllers
 {
@@ -71,6 +74,23 @@ namespace Nybsys.Api.Controllers
 			{
 				result = result,
 				model = value
+			};
+
+			return Ok(res);
+
+		}
+		[HttpPost]
+		[Route("getall-equipment")]
+		public async Task<IActionResult>GetAllEquipment(StocFilter value)
+		{
+
+			DataSet dataSet = _inventoryService.GetAllEquipment(value);
+			string json = JsonConvert.SerializeObject(dataSet);
+
+			bool result = false;
+			var res = new
+			{
+				result = result,
 			};
 
 			return Ok(res);

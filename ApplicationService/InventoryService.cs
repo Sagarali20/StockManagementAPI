@@ -2,6 +2,7 @@
 using Nybsys.EntityModels;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +57,10 @@ namespace ApplicationService
 		public async Task<Equipment?> GetEquipmentById(int id)
 		{
 			return await _unitOfWork.Equipment.GetById(id);
+		}
+		public DataSet GetAllEquipment(StocFilter filter)
+		{
+			return _unitOfWork.Equipment.GetAllEquipmentDataset(filter);
 		}
 
 	}

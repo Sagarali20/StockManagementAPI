@@ -6,6 +6,7 @@ using Nybsys.DataAccess.Contracts2;
 using Nybsys.EntityModels;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,9 +33,24 @@ namespace Nybsys.DataAccess.Repository
 		//}
      
 
-		public List<Equipment> GetAllEquipment()
+		public List<Equipment> GetAllEquipment(StocFilter filter)
 		{
+
+
+
+		//	DataSet ds = GetDataSet("")
+
+
 			throw new NotImplementedException();
+		}
+
+		public DataSet GetAllEquipmentDataset(StocFilter filter)
+		{
+
+
+			DataSet ds = GetDataSet("select * from equipments");
+
+			return ds;
 		}
 	}
 }
