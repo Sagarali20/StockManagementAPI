@@ -1,11 +1,14 @@
 ﻿using DatabaseContext;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 using Nybsys.DataAccess.Contract;
 using Nybsys.DataAccess.Contracts2;
 using Nybsys.EntityModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -15,7 +18,7 @@ namespace Nybsys.DataAccess.Repository
 {
 	public class EquipmentRepository : GenericRepository<Equipment>, IEquipmentRepository
 	{
-		public EquipmentRepository(NybsysDbContext dbContext, ILogger logger) : base(dbContext, logger)
+		public EquipmentRepository(NybsysDbContext dbContext, ILogger logger ) : base(dbContext,logger)
 		{
 
 		}
@@ -44,13 +47,82 @@ namespace Nybsys.DataAccess.Repository
 			throw new NotImplementedException();
 		}
 
-		public DataSet GetAllEquipmentDataset(StocFilter filter)
+		public DataSet GetAllEquipmentFilter(StocFilter filter)
 		{
+			DataSet ds = new DataSet();
+			string sqlQuery = @"declare @pagestart int
+                                declare @pageend int
+                                set @pagestart=(@pageno-1)* @pagesize 
+                                set @pageend = @pagesize
 
+                                select eq.Id  into #EquipmentsFilter from Equipments eq								
+                                LEFT JOIN  Categorys ct on ct.CategoryId = eq.CategoryId 
+								where  eq.Id is not null
+								SELECT TOP (@pagesize)
+                                  *  Into #EquipmentsResultData
+                                FROM  #EquipmentsFilter
+                                where Id NOT IN(Select TOP (@pagestart) Id from #EquipmentsFilter #cd order by #cd.Id desc)
+							    order by Id desc    
+								select eq.*,ct.[Name] as CategoryName,
+								eq.EquipmentId,
+                                eq.CategoryId,
+								eq.[Name],
+								eq.SKU,
+								eq.Retail,
+								eq.RepCost,
+								eq.WholeSalePrice,
+								eq.Unit,
+								eq.LocalCode,
+								eq.Barcode,
+								eq.Comments,
+								eq.RackNo,
+								eq.IsActive,
+								eq.Note
+                                from #EquipmentsResultData eqd
+								LEFT JOIN Equipments eq on eq.Id = eqd.Id
+								left join Categorys  ct on ct.CategoryId=eq.CategoryId
+                                where eq.Id IS NOT NULL             
+								select count(*) [TotalCount]
+                                from #EquipmentsFilter
+								Drop table #EquipmentsFilter
+								drop table #EquipmentsResultData";
+			//try
+			//{
 
-			DataSet ds = GetDataSet("select * from equipments");
+			//	sqlQuery = string.Format(sqlQuery, filter.PageNo, filter.PageSize);
 
-			return ds;
+			//	 ds = GetDataSet(sqlQuery);
+
+			//}
+			//catch (Exception ex)
+			//{
+			//	return null;
+			//}
+
+			try
+			{
+				//sqlQuery = string.Format(sqlQuery, CompanyId, filter.StartDate);
+				sqlQuery = string.Format(sqlQuery, sqlQuery);
+				using (SqlCommand cmd = GetSQLCommand(sqlQuery))
+				{
+					//AddParameter(cmd, pDateTime("StartDate", filter.StartDate));
+					//AddParameter(cmd, pDateTime("EndDate", filter.EndDate));
+					//AddParameter(cmd, pGuid("CompanyId", filter.CompanyId));
+					AddParameter(cmd, pInt32("pagesize", filter.PageSize));
+					AddParameter(cmd, pInt32("pageno", filter.PageNo));
+					//if (!string.IsNullOrWhiteSpace(filter.SearchText))
+					//	AddParameter(cmd, pNVarChar("SearchText", Uri.UnescapeDataString(filter.SearchText)));
+
+					DataSet dsResult = GetDataSet(cmd);
+					return dsResult;
+				}
+			}
+			catch (Exception ex)
+			{
+				return null;
+			}
+
+			
 		}
 	}
 }

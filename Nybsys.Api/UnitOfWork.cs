@@ -12,7 +12,7 @@ namespace Nybsys.Api
 		private readonly NybsysDbContext _Context;
 
 		public IUserRepository User { get; private set; }
-		public IEquipmentRepository Equipment { get; private set; }
+		public IEquipmentRepository EquipmentDataAccess { get; private set; }
 		public ICategoryRepository Category { get; private set; }
 
 		public IInventoryWarehouseRepository InventoryWarehouse { get; private set; }
@@ -22,7 +22,7 @@ namespace Nybsys.Api
 			_Context = context;
 			var _logger = logger.CreateLogger(categoryName: "logs");
 			User = new UserRepository(_Context, _logger) ;
-			Equipment = new EquipmentRepository(_Context, _logger) ;
+			EquipmentDataAccess = new EquipmentRepository(_Context, _logger) ;
 			Category = new CategoryRepository(_Context, _logger) ;
 			InventoryWarehouse = new InventoryWarehouseRepository(_Context, _logger) ;
 		}

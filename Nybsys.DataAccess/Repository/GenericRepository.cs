@@ -6,9 +6,11 @@ using Nybsys.DataAccess.Contracts2;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Nybsys.DataAccess.Repository
@@ -95,6 +97,102 @@ namespace Nybsys.DataAccess.Repository
 			command = new SqlCommand(TableName, _DBConnection);
 			command.CommandType = CommandType.Text;
 			return command;
+		}
+		protected SqlCommand GetSQLCommand(string QueryString)
+		{
+			if(DBConnection !=null)
+			{
+			    SqlCommand command;
+				command = new SqlCommand(QueryString, DBConnection);
+		     	command.CommandType = CommandType.Text;
+				return command;
+			}
+
+			return null;
+		}
+
+
+		protected DataSet GetDataSet(SqlCommand command)
+		{
+			return GetDataSet(command, "Default");
+		}
+
+		public DataSet GetDataSet(SqlCommand command, string tablename)
+		{
+			DataSet dataset = new DataSet();
+			dataset.Tables.Add(new DataTable(tablename));
+
+			SqlDataAdapter dataadapter = new SqlDataAdapter(command);
+			dataadapter.Fill(dataset, tablename);
+			return dataset;
+		}
+
+		public void AddParameter(SqlCommand command, SqlParameter param)
+		{
+			if (param != null)
+				command.Parameters.Add(param);
+		}
+		protected SqlParameter pDateTime(string paramName, DateTime? value)
+		{
+			return pDateTime(paramName, value, ParameterDirection.Input);
+		}
+		protected SqlParameter pDateTime(string paramName, DateTime? value, ParameterDirection direction)
+		{
+			SqlParameter param = new SqlParameter("@" + paramName, SqlDbType.DateTime);
+			if (!value.HasValue)
+				param.Value = DBNull.Value;
+			else if (value.Value == DateTime.MinValue && direction == ParameterDirection.Input)
+				param.Value = DBNull.Value;
+			else
+				param.Value = value;
+			param.Direction = direction;
+			return param;
+		}
+		protected SqlParameter pInt32(string paramName, int value)
+		{
+			return pInt32(paramName, value, ParameterDirection.Input);
+		}
+		protected SqlParameter pInt32(string paramName, int? value)
+		{
+			return pInt32(paramName, value, ParameterDirection.Input);
+		}
+		protected SqlParameter pInt32(string paramName, int? value, ParameterDirection direction)
+		{
+			SqlParameter param = new SqlParameter("@" + paramName, SqlDbType.Int);
+			if (!value.HasValue)
+				param.Value = DBNull.Value;
+			else
+				param.Value = value;
+			param.Direction = direction;
+			return param;
+		}
+		public SqlParameter pNVarChar(string paramName, string value)
+		{
+			return pNVarChar(paramName, -1, value, ParameterDirection.Input);
+		}
+		protected SqlParameter pNVarChar(string paramName, int size, string value, ParameterDirection direction)
+		{
+			SqlParameter param = new SqlParameter("@" + paramName, SqlDbType.NVarChar);
+			param.Size = size;
+			if (value == null)
+				param.Value = "";
+			else
+				param.Value = value;
+			param.Direction = direction;
+			return param;
+		}
+
+		protected SqlParameter pGuid(string paramName, Guid value)
+		{
+			return pGuid(paramName, value, ParameterDirection.Input);
+		}
+
+		protected SqlParameter pGuid(string paramName, Guid value, ParameterDirection direction)
+		{
+			SqlParameter param = new SqlParameter("@" + paramName, SqlDbType.UniqueIdentifier);
+			param.Value = value;
+			param.Direction = direction;
+			return param;
 		}
 
 

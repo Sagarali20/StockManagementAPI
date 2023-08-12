@@ -12,6 +12,6 @@ namespace Nybsys.DataAccess.Contract
 	public interface IEquipmentRepository: IGenericRepository<Equipment>
 	{
 		List<Equipment> GetAllEquipment(StocFilter filter);
-		DataSet GetAllEquipmentDataset(StocFilter filter);
+		DataSet GetAllEquipmentFilter(StocFilter filter);
 	}
 }

@@ -20,7 +20,7 @@ namespace ApplicationService
 		}
 		public async Task<bool> InsertEquipment(Equipment Equipment)
 		{
-			return await _unitOfWork.Equipment.Add(Equipment);
+			return await _unitOfWork.EquipmentDataAccess.Add(Equipment);
 		}
 		public async Task<bool> InsertCategory(Category Category)
 		{
@@ -28,15 +28,15 @@ namespace ApplicationService
 		}
 		public async Task<bool> UpdateEquipment(Equipment Equipment)
 		{
-			return await _unitOfWork.Equipment.Update(Equipment);
+			return await _unitOfWork.EquipmentDataAccess.Update(Equipment);
 		}
 		public async Task<bool> DeleteEquipment(Equipment Equipment)
 		{
-			return await _unitOfWork.Equipment.Delete(Equipment);
+			return await _unitOfWork.EquipmentDataAccess.Delete(Equipment);
 		}
 		public async Task<List<Equipment>> GetAllEquipment()
 		{
-			var dr = await _unitOfWork.Equipment.GetAll();
+			var dr = await _unitOfWork.EquipmentDataAccess.GetAll();
 			return dr.ToList();
 		}
 		public async Task<List<Category>> GetAllCategory()
@@ -56,11 +56,49 @@ namespace ApplicationService
 		}
 		public async Task<Equipment?> GetEquipmentById(int id)
 		{
-			return await _unitOfWork.Equipment.GetById(id);
+			return await _unitOfWork.EquipmentDataAccess.GetById(id);
 		}
-		public DataSet GetAllEquipment(StocFilter filter)
+		public List<Equipment> GetAllEquipment(StocFilter filter)
 		{
-			return _unitOfWork.Equipment.GetAllEquipmentDataset(filter);
+			  List<Equipment> list = new List<Equipment>();
+			  DataSet ds=_unitOfWork.EquipmentDataAccess.GetAllEquipmentFilter(filter);
+			if (ds != null)
+			{
+				list = (from DataRow dr in ds.Tables[0].Rows
+						select new Equipment()
+						{
+							Id = dr["Id"] != DBNull.Value ? Convert.ToInt32(dr["Id"]) : 0,
+							WholeSalePrice = dr["WholeSalePrice"] != DBNull.Value ? Convert.ToDouble(dr["WholeSalePrice"]) : 0,
+							Name = dr["Name"].ToString(),
+						    CategoryName = dr["CategoryName"].ToString(),
+							Unit = dr["Unit"].ToString(),
+							LocalCode = dr["LocalCode"].ToString(),
+							Description = dr["Description"].ToString(),
+							Barcode = dr["Barcode"].ToString(),
+							Comments = dr["Comments"].ToString(),
+							Note = dr["Note"].ToString(),
+							RackNo = dr["RackNo"].ToString(),
+							IsActive = Convert.ToBoolean(dr["IsActive"]),
+							Retail = dr["Retail"] != DBNull.Value ? Convert.ToDouble(dr["Retail"]) : 0,
+							RepCost = dr["RepCost"] != DBNull.Value ? Convert.ToDouble(dr["RepCost"]) : 0,
+							EquipmentId = (Guid)dr["EquipmentId"],
+							CategoryId = (Guid)dr["CategoryId"],
+
+						}).ToList();
+
+			}
+
+			return list;
+				
+			
+		}
+
+		public DataTable datalldatatable(StocFilter filter)
+		{
+			DataSet ds = _unitOfWork.EquipmentDataAccess.GetAllEquipmentFilter(filter);
+
+		  return ds.Tables[0];
+
 		}
 
 	}

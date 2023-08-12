@@ -83,14 +83,14 @@ namespace Nybsys.Api.Controllers
 		[Route("getall-equipment")]
 		public async Task<IActionResult>GetAllEquipment(StocFilter value)
 		{
+			var equipmentlist = _inventoryService.GetAllEquipment(value);
 
-			DataSet dataSet = _inventoryService.GetAllEquipment(value);
-			string json = JsonConvert.SerializeObject(dataSet);
+			DataTable dt = _inventoryService.datalldatatable(value);
 
-			bool result = false;
 			var res = new
 			{
-				result = result,
+				equipmentlist = equipmentlist,
+				result = true,
 			};
 
 			return Ok(res);
@@ -200,6 +200,8 @@ namespace Nybsys.Api.Controllers
 
 			return Ok(new { category = allCategory });
 		}
+
+
 
 
 	}
