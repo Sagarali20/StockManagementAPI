@@ -8,7 +8,7 @@ namespace Nybsys.EntityModels.Dto
 {
 	public class EquipmentWithCount
 	{
-		public List<Equipment> Equipment { get; set; }
+		public List<Equipment> EquipmentList { get; set; }
 		public Int32 Count { get; set; }	
 	}
 }

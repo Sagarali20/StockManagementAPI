@@ -13,6 +13,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Nybsys.DataAccess.Repository
 {
@@ -49,7 +50,6 @@ namespace Nybsys.DataAccess.Repository
 
 		public DataSet GetAllEquipmentFilter(StocFilter filter)
 		{
-			DataSet ds = new DataSet();
 			string sqlQuery = @"declare @pagestart int
                                 declare @pageend int
                                 set @pagestart=(@pageno-1)* @pagesize 
@@ -57,7 +57,7 @@ namespace Nybsys.DataAccess.Repository
 
                                 select eq.Id  into #EquipmentsFilter from Equipments eq								
                                 LEFT JOIN  Categorys ct on ct.CategoryId = eq.CategoryId 
-								where  eq.Id is not null
+								where  eq.Id is not null {0}
 								SELECT TOP (@pagesize)
                                   *  Into #EquipmentsResultData
                                 FROM  #EquipmentsFilter
@@ -81,28 +81,25 @@ namespace Nybsys.DataAccess.Repository
                                 from #EquipmentsResultData eqd
 								LEFT JOIN Equipments eq on eq.Id = eqd.Id
 								left join Categorys  ct on ct.CategoryId=eq.CategoryId
-                                where eq.Id IS NOT NULL             
+                                where eq.Id IS NOT NULL {0}            
 								select count(*) [TotalCount]
                                 from #EquipmentsFilter
 								Drop table #EquipmentsFilter
 								drop table #EquipmentsResultData";
-			//try
-			//{
 
-			//	sqlQuery = string.Format(sqlQuery, filter.PageNo, filter.PageSize);
+			string sqlSubQuery = "";
 
-			//	 ds = GetDataSet(sqlQuery);
+			if (!string.IsNullOrWhiteSpace(filter.SearchText))
+			{
+				filter.SearchText = HttpUtility.UrlDecode(filter.SearchText);
+				sqlSubQuery += " AND CHARINDEX(@SearchText,eq.[Name]) > 0 or CHARINDEX(@SearchText,eq.SKU) > 0 or CHARINDEX(@SearchText,eq.LocalCode) > 0";
 
-			//}
-			//catch (Exception ex)
-			//{
-			//	return null;
-			//}
-
+			}
 			try
 			{
+
 				//sqlQuery = string.Format(sqlQuery, CompanyId, filter.StartDate);
-				sqlQuery = string.Format(sqlQuery, sqlQuery);
+				sqlQuery = string.Format(sqlQuery, sqlSubQuery);
 				using (SqlCommand cmd = GetSQLCommand(sqlQuery))
 				{
 					//AddParameter(cmd, pDateTime("StartDate", filter.StartDate));
@@ -110,8 +107,8 @@ namespace Nybsys.DataAccess.Repository
 					//AddParameter(cmd, pGuid("CompanyId", filter.CompanyId));
 					AddParameter(cmd, pInt32("pagesize", filter.PageSize));
 					AddParameter(cmd, pInt32("pageno", filter.PageNo));
-					//if (!string.IsNullOrWhiteSpace(filter.SearchText))
-					//	AddParameter(cmd, pNVarChar("SearchText", Uri.UnescapeDataString(filter.SearchText)));
+					if (!string.IsNullOrWhiteSpace(filter.SearchText))
+						AddParameter(cmd, pNVarChar("SearchText", Uri.UnescapeDataString(filter.SearchText)));
 
 					DataSet dsResult = GetDataSet(cmd);
 					return dsResult;

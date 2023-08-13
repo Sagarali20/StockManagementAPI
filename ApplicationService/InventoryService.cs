@@ -1,5 +1,6 @@
 ﻿using Nybsys.DataAccess.Contracts2;
 using Nybsys.EntityModels;
+using Nybsys.EntityModels.Dto;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -58,19 +59,54 @@ namespace ApplicationService
 		{
 			return await _unitOfWork.EquipmentDataAccess.GetById(id);
 		}
-		public List<Equipment> GetAllEquipment(StocFilter filter)
+		//public List<Equipment> GetAllEquipment(StocFilter filter)
+		//{
+		//	  List<Equipment> list = new List<Equipment>();
+		//	  DataSet ds=_unitOfWork.EquipmentDataAccess.GetAllEquipmentFilter(filter);
+		//	if (ds != null)
+		//	{
+		//		list = (from DataRow dr in ds.Tables[0].Rows
+		//				select new Equipment()
+		//				{
+		//					Id = dr["Id"] != DBNull.Value ? Convert.ToInt32(dr["Id"]) : 0,
+		//					WholeSalePrice = dr["WholeSalePrice"] != DBNull.Value ? Convert.ToDouble(dr["WholeSalePrice"]) : 0,
+		//					Name = dr["Name"].ToString(),
+		//				    CategoryName = dr["CategoryName"].ToString(),
+		//					Unit = dr["Unit"].ToString(),
+		//					LocalCode = dr["LocalCode"].ToString(),
+		//					Description = dr["Description"].ToString(),
+		//					Barcode = dr["Barcode"].ToString(),
+		//					Comments = dr["Comments"].ToString(),
+		//					Note = dr["Note"].ToString(),
+		//					RackNo = dr["RackNo"].ToString(),
+		//					IsActive = Convert.ToBoolean(dr["IsActive"]),
+		//					Retail = dr["Retail"] != DBNull.Value ? Convert.ToDouble(dr["Retail"]) : 0,
+		//					RepCost = dr["RepCost"] != DBNull.Value ? Convert.ToDouble(dr["RepCost"]) : 0,
+		//					EquipmentId = (Guid)dr["EquipmentId"],
+		//					CategoryId = (Guid)dr["CategoryId"],
+
+		//				}).ToList();
+
+		//	}
+
+		//	return list;
+				
+			
+		//}
+
+		public EquipmentWithCount GetAllEquipment(StocFilter filter)
 		{
-			  List<Equipment> list = new List<Equipment>();
-			  DataSet ds=_unitOfWork.EquipmentDataAccess.GetAllEquipmentFilter(filter);
+			EquipmentWithCount equipmentWithCount = new EquipmentWithCount();	
+			DataSet ds = _unitOfWork.EquipmentDataAccess.GetAllEquipmentFilter(filter);
 			if (ds != null)
 			{
-				list = (from DataRow dr in ds.Tables[0].Rows
+				equipmentWithCount.EquipmentList = (from DataRow dr in ds.Tables[0].Rows
 						select new Equipment()
 						{
 							Id = dr["Id"] != DBNull.Value ? Convert.ToInt32(dr["Id"]) : 0,
 							WholeSalePrice = dr["WholeSalePrice"] != DBNull.Value ? Convert.ToDouble(dr["WholeSalePrice"]) : 0,
 							Name = dr["Name"].ToString(),
-						    CategoryName = dr["CategoryName"].ToString(),
+							CategoryName = dr["CategoryName"].ToString(),
 							Unit = dr["Unit"].ToString(),
 							LocalCode = dr["LocalCode"].ToString(),
 							Description = dr["Description"].ToString(),
@@ -85,13 +121,19 @@ namespace ApplicationService
 							CategoryId = (Guid)dr["CategoryId"],
 
 						}).ToList();
+				//equipmentWithCount.Count = ds.Tables[1].Rows[0]["TotalCount"] != DBNull.Value ? Convert.ToInt32(ds.Tables[1].Rows[0]["TotalCount"]) : 0;
+
+				equipmentWithCount.Count = ds.Tables[1].Rows.Count > 0 ?
+								   (int)ds.Tables[1].Rows[0]["TotalCount"] : 0;
+				//equipmentWithCount.Count=
 
 			}
 
-			return list;
-				
-			
+			return equipmentWithCount;
+
+
 		}
+
 
 		public DataTable datalldatatable(StocFilter filter)
 		{

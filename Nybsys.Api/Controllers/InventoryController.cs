@@ -83,13 +83,13 @@ namespace Nybsys.Api.Controllers
 		[Route("getall-equipment")]
 		public async Task<IActionResult>GetAllEquipment(StocFilter value)
 		{
-			var equipmentlist = _inventoryService.GetAllEquipment(value);
+			var equipment = _inventoryService.GetAllEquipment(value);
 
-			DataTable dt = _inventoryService.datalldatatable(value);
 
 			var res = new
 			{
-				equipmentlist = equipmentlist,
+				equipmentlist = equipment.EquipmentList,
+				Count = equipment.Count,
 				result = true,
 			};
 
