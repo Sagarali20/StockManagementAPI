@@ -21,5 +21,7 @@ namespace Nybsys.EntityModels
 		public string PurchaseOrderId { get; set; }
 		[Column(TypeName = "NVARCHAR(50)")]
 		public string Description { get; set; }
+		public DateTime LastUpdatedDate { get; set; }
+		public Guid LastUpdatedBy { get; set; }
 	}
 }

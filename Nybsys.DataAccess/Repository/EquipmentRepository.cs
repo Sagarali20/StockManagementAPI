@@ -66,7 +66,7 @@ namespace Nybsys.DataAccess.Repository
 								select eq.*,ct.[Name] as CategoryName,
 								eq.EquipmentId,
                                 eq.CategoryId,
-								eq.[Name],
+								eq.[Name], 
 								eq.SKU,
 								eq.Retail,
 								eq.RepCost,

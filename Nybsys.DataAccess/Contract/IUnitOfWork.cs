@@ -12,7 +12,7 @@ namespace Nybsys.DataAccess.Contracts2
 		IUserRepository User { get; }
 		IEquipmentRepository  EquipmentDataAccess { get; }
 		ICategoryRepository Category { get; }	
-		IInventoryWarehouseRepository InventoryWarehouse { get; }
+		IInventoryWarehouseRepository InventoryWarehouseDataAccess { get; }
 		Task CompleteAsync();
 	}
 }

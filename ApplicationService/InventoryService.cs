@@ -27,6 +27,7 @@ namespace ApplicationService
 		{
 			return await _unitOfWork.Category.Add(Category);
 		}
+
 		public async Task<bool> UpdateEquipment(Equipment Equipment)
 		{
 			return await _unitOfWork.EquipmentDataAccess.Update(Equipment);
@@ -141,6 +142,17 @@ namespace ApplicationService
 
 		  return ds.Tables[0];
 
+		}
+
+		public async Task<bool> InsertInventoryWarehouse(InventoryWarehouse InventoryWarehouse)
+		{
+			return await _unitOfWork.InventoryWarehouseDataAccess.Add(InventoryWarehouse);
+		}
+		public async Task<List<InventoryWarehouse>> GetAllInventoryWarehouse()
+		{
+			var dr = await _unitOfWork.InventoryWarehouseDataAccess.GetAll();
+
+			return dr.ToList();
 		}
 
 	}

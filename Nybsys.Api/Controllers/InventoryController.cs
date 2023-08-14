@@ -32,13 +32,18 @@ namespace Nybsys.Api.Controllers
 		[HttpPost]
 		[Route("get-equipment-by-id")]
 		public async Task<IActionResult> Get(int id)
-		{
+		 {
 			var model = await _inventoryService.GetEquipmentById(id);
 			if (model == null)
 			{
 				return NotFound();
 			}
-			return Ok(model);
+
+			var res = new
+			{ 
+				equipment = model
+			};
+			return Ok(res);
 		}
 
 		[HttpPost]
@@ -199,6 +204,36 @@ namespace Nybsys.Api.Controllers
 			var allCategory = await _inventoryService.GetAllCategory();
 
 			return Ok(new { category = allCategory });
+		}
+		[HttpGet()]
+		[Route("getall-inventoryWarehouse")]
+		public async Task<IActionResult> GetAllInventoryWarehouse()
+		{
+			var InventoryWarehouse = await _inventoryService.GetAllInventoryWarehouse();
+
+			return Ok(new { data = InventoryWarehouse });
+		}
+
+
+		[HttpPost]
+		[Route("add-inventory-warehouse")]
+
+		public async Task<IActionResult> AddEquipment([FromBody] InventoryWarehouse value)
+		{
+			bool result = false;
+			if (value != null)
+			{
+					value.LastUpdatedDate = DateTime.UtcNow;
+					value.LastUpdatedBy = new Guid();
+					result = await _inventoryService.InsertInventoryWarehouse(value);				
+			}
+			var res = new
+			{
+				result = result,
+				model = value
+			};
+			return Ok(res);
+
 		}
 
 
