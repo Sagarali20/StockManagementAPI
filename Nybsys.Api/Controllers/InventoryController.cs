@@ -223,6 +223,11 @@ namespace Nybsys.Api.Controllers
 			bool result = false;
 			if (value != null)
 			{
+				if(value.Type=="Damage")
+				{
+					value.Quantity = -value.Quantity;
+
+				}
 					value.LastUpdatedDate = DateTime.UtcNow;
 					value.LastUpdatedBy = new Guid();
 					result = await _inventoryService.InsertInventoryWarehouse(value);				

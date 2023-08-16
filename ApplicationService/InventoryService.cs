@@ -54,11 +54,11 @@ namespace ApplicationService
 
 		public async Task<Category?> GetCategoryById(int id)
 		{
-			return await _unitOfWork.Category.GetById(id);
+			return await _unitOfWork.Category.GetAll(id);
 		}
 		public async Task<Equipment?> GetEquipmentById(int id)
 		{
-			return await _unitOfWork.EquipmentDataAccess.GetById(id);
+			return await _unitOfWork.EquipmentDataAccess.GetAll(id);
 		}
 		//public List<Equipment> GetAllEquipment(StocFilter filter)
 		//{

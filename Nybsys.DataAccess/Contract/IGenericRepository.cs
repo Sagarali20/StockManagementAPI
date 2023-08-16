@@ -10,7 +10,7 @@ namespace Nybsys.DataAccess.Contracts2
 	public interface IGenericRepository<T> where T : class
 	{
 		Task<IEnumerable<T>> GetAll();
-		Task<T?> GetById(int id);
+		Task<T?> GetAll(int id);
 		Task<bool> Add(T entity);
 		//bool Update(T entity);
 		Task<bool> Update(T entity);

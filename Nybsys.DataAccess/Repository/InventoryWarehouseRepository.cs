@@ -18,9 +18,14 @@ namespace Nybsys.DataAccess.Repository
 		{
 
 		}
-		public override async Task<InventoryWarehouse?> GetById(int id)
+		public override async Task<InventoryWarehouse?> GetAll(int id)
 		{
 			return await _dbContext.InventoryWarehouses.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 		}
+		public override async Task<IEnumerable<InventoryWarehouse>> GetAll()
+		{
+			return await _dbContext.InventoryWarehouses.OrderByDescending(x => x.Id).ToListAsync();
+		}
+
 	}
 }

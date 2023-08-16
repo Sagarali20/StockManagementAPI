@@ -11,5 +11,6 @@ namespace Nybsys.DataAccess.Contract
 	public interface IInventoryWarehouseRepository:IGenericRepository<InventoryWarehouse>
 	{
 
+
 	}
 }

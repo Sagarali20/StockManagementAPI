@@ -17,7 +17,7 @@ namespace Nybsys.DataAccess.Repository
 		public CategoryRepository(NybsysDbContext dbContext, ILogger logger) : base(dbContext, logger)
 		{
 		}
-		public override async Task<Category?> GetById(int id)
+		public override async Task<Category?> GetAll(int id)
 		{
 			return await _dbContext.Categorys.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 		}
