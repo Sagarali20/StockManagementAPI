@@ -36,7 +36,7 @@ namespace ApplicationService
 		}
 		public async Task<User?> GetUserById(int id)
 		{
-			return await _unitOfWork.User.GetAll(id);
+			return await _unitOfWork.User.GetById(id);
 		}
 		//public List<User> GetEmployee()
 		//{

@@ -214,6 +214,14 @@ namespace Nybsys.Api.Controllers
 			return Ok(new { data = InventoryWarehouse });
 		}
 
+		[HttpGet()]
+		[Route("getall-inventoryWarehouse-by-guidid")]
+		public async Task<IActionResult> GetAllInventoryWarehousebyId(string id)
+		{
+			var InventoryWarehouse = await _inventoryService.GetAllInventoryWarehouseByGuidId(Guid.Parse(id));
+
+			return Ok(new { data = InventoryWarehouse });
+		}
 
 		[HttpPost]
 		[Route("add-inventory-warehouse")]

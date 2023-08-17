@@ -54,11 +54,11 @@ namespace ApplicationService
 
 		public async Task<Category?> GetCategoryById(int id)
 		{
-			return await _unitOfWork.Category.GetAll(id);
+			return await _unitOfWork.Category.GetById(id);
 		}
 		public async Task<Equipment?> GetEquipmentById(int id)
 		{
-			return await _unitOfWork.EquipmentDataAccess.GetAll(id);
+			return await _unitOfWork.EquipmentDataAccess.GetById(id);
 		}
 		//public List<Equipment> GetAllEquipment(StocFilter filter)
 		//{
@@ -151,6 +151,12 @@ namespace ApplicationService
 		public async Task<List<InventoryWarehouse>> GetAllInventoryWarehouse()
 		{
 			var dr = await _unitOfWork.InventoryWarehouseDataAccess.GetAll();
+
+			return dr.ToList();
+		}
+		public async Task<List<InventoryWarehouse>> GetAllInventoryWarehouseByGuidId(Guid id)
+		{
+			var dr = await _unitOfWork.InventoryWarehouseDataAccess.GetAllByGuidId(id);
 
 			return dr.ToList();
 		}

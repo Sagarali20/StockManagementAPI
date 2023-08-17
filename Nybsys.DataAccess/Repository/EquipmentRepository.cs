@@ -24,7 +24,7 @@ namespace Nybsys.DataAccess.Repository
 
 		}
 
-		public override async Task<Equipment?> GetAll(int id)
+		public override async Task<Equipment?> GetById(int id)
 		{
 			return await _dbContext.Equipments.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 		}

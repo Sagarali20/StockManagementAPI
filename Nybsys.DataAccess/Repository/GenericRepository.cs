@@ -36,8 +36,17 @@ namespace Nybsys.DataAccess.Repository
 		{
 			return await _dbSet.AsNoTracking().ToListAsync();
 		}
+		public virtual async Task<IEnumerable<T>> GetAllByGuidId(Guid id)
+		{
+			return await _dbSet.AsNoTracking().ToListAsync();
 
-		public virtual async Task<T?> GetAll(int id)
+		}
+
+		public virtual async Task<T?> GetById(int id)
+		{
+			return await _dbSet.FindAsync(id);
+		}
+		public virtual async Task<T?> GetByGuidId(Guid id)
 		{
 			return await _dbSet.FindAsync(id);
 		}
