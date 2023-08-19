@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DatabaseContext\DatabaseContext.csproj" />
+    <ProjectReference Include="..\Framework\Framework.csproj" />
     <ProjectReference Include="..\Nybsys.EntityModels\Nybsys.EntityModels.csproj" />
   </ItemGroup>
 

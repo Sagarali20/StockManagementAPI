@@ -7,6 +7,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Framework;
+
 
 namespace ApplicationService
 {
@@ -156,7 +158,13 @@ namespace ApplicationService
 		}
 		public async Task<List<InventoryWarehouse>> GetAllInventoryWarehouseByGuidId(Guid id)
 		{
+
 			var dr = await _unitOfWork.InventoryWarehouseDataAccess.GetAllByGuidId(id);
+
+			foreach (var item in dr)
+			{
+				item.LastUpdatedDate = item.LastUpdatedDate.UTCToClientTime();
+			}
 
 			return dr.ToList();
 		}
