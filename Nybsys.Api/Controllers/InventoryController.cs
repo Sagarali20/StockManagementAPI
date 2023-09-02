@@ -228,7 +228,8 @@ namespace Nybsys.Api.Controllers
 
 		public async Task<IActionResult> AddEquipment([FromBody] InventoryWarehouse value)
 		{
-			bool result = false;
+
+            bool result = false;
 			if (value != null)
 			{
 				if(value.Type=="Damage")
