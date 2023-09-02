@@ -32,14 +32,18 @@ namespace ApplicationService
 		{
 			return await _unitOfWork.CustomerDataAccess.Delete(Customer);
 		}
+        public async Task<Customer?> GetCustomerById(int  id)
+        {
+            return await _unitOfWork.CustomerDataAccess.GetById(id);
+        }
 
-		public  CustomerWithCount  GetAllCustomer(StocFilter stocFilter)
+        public  CustomerWithCount  GetAllCustomer(StocFilter stocFilter)
 		{ 
 			CustomerWithCount customerWithCount = new CustomerWithCount();
 
 			List<Customer> list = new List<Customer>();
 			DataSet ds = _unitOfWork.CustomerDataAccess.GetAllCustomerFilter(stocFilter);
-            if (ds != null)
+            if (ds is not null)
             {
                 customerWithCount.Customerlist = (from DataRow dr in ds.Tables[0].Rows
                                                     select new Customer()
@@ -48,6 +52,7 @@ namespace ApplicationService
                                                         FirstName = dr["FirstName"].ToString(),
                                                         LastName = dr["LastName"].ToString(),
                                                         Type = dr["Type"].ToString(),
+                                                        PhoneNumber = dr["PhoneNumber"].ToString(),
                                                         Address = dr["Address"].ToString(),
                                                         EmailAddress = dr["EmailAddress"].ToString(),
                                                         JoinDate = Convert.ToDateTime(dr["JoinDate"]),

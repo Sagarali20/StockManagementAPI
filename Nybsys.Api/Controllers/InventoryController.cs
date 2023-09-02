@@ -1,4 +1,4 @@
-﻿using ApplicationService;
+﻿using ApplicationService.Contract;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Nybsys.DataAccess.Contracts2;
@@ -10,16 +10,16 @@ namespace Nybsys.Api.Controllers
 {
 
 
-	[Route("api/inventory")]
+    [Route("api/inventory")]
 
 	[ApiController]
 	public class InventoryController : ControllerBase
 	{
-		private readonly InventoryService _inventoryService;
-		public InventoryController(IUnitOfWork unitOfWork) 
+		private readonly IInventoryService _inventoryService;
+		public InventoryController(IInventoryService inventoryService) 
 		{
-			_inventoryService = new InventoryService(unitOfWork);
-
+			//_inventoryService = new InventoryService(unitOfWork);
+			_inventoryService = inventoryService;
 		}
 		[HttpGet]
 		[Route("getall-equipment")]

@@ -49,7 +49,7 @@ namespace Nybsys.DataAccess.Repository
 		}
 
 		public DataSet GetAllEquipmentFilter(StocFilter filter)
-		{
+	{
 			string sqlQuery = @"declare @pagestart int
                                 declare @pageend int
                                 set @pagestart=(@pageno-1)* @pagesize 
@@ -91,7 +91,7 @@ namespace Nybsys.DataAccess.Repository
 
 			if (!string.IsNullOrWhiteSpace(filter.SearchText))
 			{
-				filter.SearchText = HttpUtility.UrlDecode(filter.SearchText);
+				filter.SearchText = HttpUtility.UrlDecode(filter.SearchText).TrimEnd();
 				sqlSubQuery += " AND CHARINDEX(@SearchText,eq.[Name]) > 0 or CHARINDEX(@SearchText,eq.SKU) > 0 or CHARINDEX(@SearchText,eq.LocalCode) > 0";
 
 			}

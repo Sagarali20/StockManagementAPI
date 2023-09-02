@@ -1,6 +1,6 @@
 ﻿namespace Nybsys.Api.Utils
 {
-    public static class LabelHelper
+    public static  class LabelHelper
     {
         public static class NybsysApiHelper
         {

@@ -8,12 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Framework;
-
+using ApplicationService.Contract;
 
 namespace ApplicationService
 {
-	public class InventoryService
-	{
+    public class InventoryService: IInventoryService
+    {
 		private readonly IUnitOfWork _unitOfWork;
 
 		public InventoryService(IUnitOfWork unitOfWork) 
@@ -21,7 +21,8 @@ namespace ApplicationService
 			_unitOfWork = unitOfWork;
 		
 		}
-		public async Task<bool> InsertEquipment(Equipment Equipment)
+
+        public async Task<bool> InsertEquipment(Equipment Equipment)
 		{
 			return await _unitOfWork.EquipmentDataAccess.Add(Equipment);
 		}

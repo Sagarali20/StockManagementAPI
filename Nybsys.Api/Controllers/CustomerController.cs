@@ -1,4 +1,5 @@
 ﻿using ApplicationService;
+using ApplicationService.Contract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nybsys.DataAccess.Contracts2;
@@ -64,12 +65,29 @@ namespace Nybsys.Api.Controllers
 
 			var res = new
 			{
-				equipmentlist = customer.Customerlist,
+                customers = customer.Customerlist,
                 Count = customer.Count,
                 result = true,
             };
             return Ok(res);
 
+        }
+
+        [HttpPost]
+        [Route("get-customer-by-id")]
+        public async Task<IActionResult> Get(int id)
+        {
+            var model = await _customerService.GetCustomerById(id);
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            var res = new
+            {
+                customer = model
+            };
+            return Ok(res);
         }
 
     }

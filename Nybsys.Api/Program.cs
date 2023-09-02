@@ -1,4 +1,5 @@
 using ApplicationService;
+using ApplicationService.Contract;
 using DatabaseContext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -11,12 +12,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<NybsysDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
 //builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 //builder.Services.AddTransient<IEmployeeTRepository, EmployeeRepositoryT>();
 //builder.Services.AddTransient<IDesignationRepository, DesignationRepository>();
 //builder.Services.AddTransient<IUserRepository, UserRepository>();
 //builder.Services.AddScoped<IUserLoginService, UserLoginService>();
+builder.Services.AddScoped<IInventoryService, InventoryService>();
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Add services to the container.
@@ -46,7 +48,6 @@ builder.Services.AddAuthentication(x =>
         ValidateAudience = false,
         ValidateIssuer = false,
         ClockSkew=TimeSpan.Zero
-
     };
 });
 

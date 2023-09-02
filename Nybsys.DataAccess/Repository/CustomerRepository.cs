@@ -27,12 +27,16 @@ namespace Nybsys.DataAccess.Repository
 
         public DataSet GetAllCustomerFilter(StocFilter filter)
         {
-            string sqlQuery = @"select ct.Id  into #CustomersFilter from Customers ct								
+            string sqlQuery = @"declare @pagestart int
+                                declare @pageend int
+                                set @pagestart=(@pageno-1)* @pagesize 
+                                set @pageend = @pagesize
+                                select ct.Id  into #CustomersFilter from Customers ct								
 								where  ct.Id is not null {0}
-								SELECT TOP (500)
+								SELECT TOP (@pagesize)
                                 *  Into #CustomersResultData
                                 FROM  #CustomersFilter
-                                where Id NOT IN(Select TOP (0) Id from #CustomersFilter #cd order by #cd.Id desc)
+                                where Id NOT IN(Select TOP (@pagestart) Id from #CustomersFilter #cd order by #cd.Id desc)
 							    order by Id desc    
 								select ct.*
                                 from #CustomersResultData crd
@@ -49,11 +53,9 @@ namespace Nybsys.DataAccess.Repository
             {
                 filter.SearchText = HttpUtility.UrlDecode(filter.SearchText);
                 sqlSubQuery += " AND CHARINDEX(@SearchText,ct.SearchText) > 0";
-
             }
             try
             {
-
                 //sqlQuery = string.Format(sqlQuery, CompanyId, filter.StartDate);
                 sqlQuery = string.Format(sqlQuery, sqlSubQuery);
                 using (SqlCommand cmd = GetSQLCommand(sqlQuery))
@@ -74,7 +76,6 @@ namespace Nybsys.DataAccess.Repository
             {
                 return null;
             }
-
 
         }
 
