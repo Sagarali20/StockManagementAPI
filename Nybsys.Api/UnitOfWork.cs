@@ -18,7 +18,11 @@ namespace Nybsys.Api
 		public IInventoryWarehouseRepository InventoryWarehouseDataAccess { get; private set; }
 		public ICustomerRepository CustomerDataAccess { get; private set; }
 
-		public UnitOfWork(NybsysDbContext context, ILoggerFactory logger)
+        public IInvoiceRepository InvoiceDataAccess { get; private set; }
+
+        public IInvoiceDetailsRepository InvoiceDetailsDataAccess { get; private set; }
+
+        public UnitOfWork(NybsysDbContext context, ILoggerFactory logger)
 		{
 			_Context = context;
 			var _logger = logger.CreateLogger(categoryName: "logs");
@@ -26,6 +30,8 @@ namespace Nybsys.Api
 			EquipmentDataAccess = new EquipmentRepository(_Context, _logger) ;
 			Category = new CategoryRepository(_Context, _logger) ;
 			InventoryWarehouseDataAccess = new InventoryWarehouseRepository(_Context, _logger) ;
+			CustomerDataAccess = new CustomerRepository(_Context, _logger) ;
+            InvoiceDataAccess = new InvoiceRepository(_Context, _logger) ;
 			CustomerDataAccess = new CustomerRepository(_Context, _logger) ;
 		}
 

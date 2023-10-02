@@ -2,6 +2,7 @@
 using ApplicationService.Contract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using Nybsys.DataAccess.Contracts2;
 using Nybsys.EntityModels;
 
@@ -86,6 +87,26 @@ namespace Nybsys.Api.Controllers
             var res = new
             {
                 customer = model
+            };
+            return Ok(res);
+        }
+        [HttpPost]
+        [Route("get-customer-by-search-name")]
+        public async Task<IActionResult> GetByname(string searchText)
+        {
+            StocFilter filter = new StocFilter();
+            filter.SearchText= searchText;
+            filter.PageNo= 1;
+            filter.PageSize = 10;
+            filter.SearchText= searchText;
+
+            var customer = _customerService.GetAllCustomer(filter);
+
+            var res = new
+            {
+                customers = customer.Customerlist,
+                Count = customer.Count,
+                result = true,
             };
             return Ok(res);
         }

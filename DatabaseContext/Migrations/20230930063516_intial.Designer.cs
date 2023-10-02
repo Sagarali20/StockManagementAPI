@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DatabaseContext.Migrations
 {
     [DbContext(typeof(NybsysDbContext))]
-    [Migration("20230726134422_Equipment_modified")]
-    partial class Equipment_modified
+    [Migration("20230930063516_intial")]
+    partial class intial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace DatabaseContext.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Nybsys.EntityModels.Driver", b =>
+            modelBuilder.Entity("Nybsys.EntityModels.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,24 +33,18 @@ namespace DatabaseContext.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid>("DriverId")
+                    b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("DriverNumber")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Team")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("NVARCHAR(50)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Drivers");
+                    b.ToTable("Categorys");
                 });
 
-            modelBuilder.Entity("Nybsys.EntityModels.EDesignation", b =>
+            modelBuilder.Entity("Nybsys.EntityModels.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -58,12 +52,60 @@ namespace DatabaseContext.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Designation")
+                    b.Property<string>("Address")
+                        .HasColumnType("NVARCHAR(250)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("EmailAddress")
+                        .HasColumnType("NVARCHAR(50)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("NVARCHAR(50)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsWholeSaler")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("JoinDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("LastCreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("NVARCHAR(50)");
+
+                    b.Property<DateTime>("LastUpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Occupation")
+                        .HasColumnType("NVARCHAR(50)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("NVARCHAR(50)");
+
+                    b.Property<string>("ProfileImage")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SearchText")
+                        .HasColumnType("NVARCHAR(250)");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("NVARCHAR(50)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("EDesignations");
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Nybsys.EntityModels.Employee", b =>
@@ -96,46 +138,6 @@ namespace DatabaseContext.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Employees");
-                });
-
-            modelBuilder.Entity("Nybsys.EntityModels.EmployeeT", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DesignationId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Doj")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IsActive")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IsMarried")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EmployeeTs");
                 });
 
             modelBuilder.Entity("Nybsys.EntityModels.Equipment", b =>
@@ -185,12 +187,6 @@ namespace DatabaseContext.Migrations
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Qty")
-                        .HasColumnType("float");
-
                     b.Property<string>("RackNo")
                         .HasColumnType("NVARCHAR(250)");
 
@@ -212,6 +208,43 @@ namespace DatabaseContext.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Equipments");
+                });
+
+            modelBuilder.Entity("Nybsys.EntityModels.InventoryWarehouse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("NVARCHAR(50)");
+
+                    b.Property<Guid>("EquipmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("LastUpdatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("LastUpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<string>("PurchaseOrderId")
+                        .HasColumnType("NVARCHAR(50)");
+
+                    b.Property<double>("Quantity")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("NVARCHAR(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("InventoryWarehouses");
                 });
 
             modelBuilder.Entity("Nybsys.EntityModels.User", b =>

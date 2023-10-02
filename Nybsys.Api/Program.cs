@@ -49,15 +49,16 @@ builder.Services.AddAuthentication(x =>
         ValidateIssuer = false,
         ClockSkew=TimeSpan.Zero
     };
+
 });
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (!app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 app.UseCors("corsplicy");
 app.UseAuthentication();
 app.UseAuthorization();

@@ -49,7 +49,8 @@ namespace Nybsys.DataAccess.Repository
 		}
 
 		public DataSet GetAllEquipmentFilter(StocFilter filter)
-	{
+	
+		{
 			string sqlQuery = @"declare @pagestart int
                                 declare @pageend int
                                 set @pagestart=(@pageno-1)* @pagesize 

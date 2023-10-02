@@ -31,7 +31,6 @@ namespace Nybsys.DataAccess.Repository
 			this._dbSet= _dbContext.Set<T>();
 			connnection = _dbContext.Database.GetConnectionString().ToString();
 		}
-
 		public virtual async Task<IEnumerable<T>> GetAll()
 		{
 			return await _dbSet.AsNoTracking().ToListAsync();
@@ -41,7 +40,6 @@ namespace Nybsys.DataAccess.Repository
 			return await _dbSet.AsNoTracking().ToListAsync();
 
 		}
-
 		public virtual async Task<T?> GetById(int id)
 		{
 			return await _dbSet.FindAsync(id);
@@ -50,31 +48,26 @@ namespace Nybsys.DataAccess.Repository
 		{
 			return await _dbSet.FindAsync(id);
 		}
-
 		public virtual async Task<bool> Add(T entity)
 		{
+			
 		    await _dbSet.AddAsync(entity);
 			return await _dbContext.SaveChangesAsync() > 0;
 		}
-
-
 		public virtual  async  Task<bool>  Update(T entity)
 		{	
 			_dbSet.Update(entity);
 			return await _dbContext.SaveChangesAsync() > 0;
 		}
-
 		public virtual async Task<bool> Delete(T entity)
 		{
 			      _dbSet.Remove(entity);
-			return await _dbContext.SaveChangesAsync() > 0;
-			
+			return await _dbContext.SaveChangesAsync() > 0;			
 		}
 		public  bool Save()
 		{
 			return _dbContext.SaveChanges() > 0;
 		}
-
 
 		public DataSet GetDataSet(string query)
 		{
@@ -141,7 +134,7 @@ namespace Nybsys.DataAccess.Repository
 			if (param != null)
 				command.Parameters.Add(param);
 		}
-		protected SqlParameter pDateTime(string paramName, DateTime? value)
+		protected SqlParameter pDateTime(string paramName, DateTime? value) 
 		{
 			return pDateTime(paramName, value, ParameterDirection.Input);
 		}
@@ -203,7 +196,6 @@ namespace Nybsys.DataAccess.Repository
 			param.Direction = direction;
 			return param;
 		}
-
 
 	}
 }

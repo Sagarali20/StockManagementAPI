@@ -21,7 +21,6 @@ namespace DatabaseContext
         //    {
         //        optionsBuilder.UseSqlServer("Server=DESKTOP-5TQKBFB\\SQLEXPRESS;Database=TestDb;Trusted_Connection=True");
         //    }
-
         //}
         public DbSet<Employee> Employees { get; set; }
         public DbSet<User> Users { get;set; }
@@ -29,8 +28,6 @@ namespace DatabaseContext
 		public DbSet<Category> Categorys { get; set; }
 		public DbSet<InventoryWarehouse> InventoryWarehouses { get; set; }
 		public DbSet<Customer> Customers { get; set; }
-
-
 
 	}
 }

@@ -38,23 +38,19 @@ namespace Nybsys.Api.Controllers
 			{
 				return BadRequest();
 			}
-
 			try
 			{
 				List<User> asds = await _userLoginService.GetAllUser();
 				 var user=  asds.FirstOrDefault(x => x.Username == model.Username);
 				if (user == null)
 				{
-
 					return NotFound(new { result = result, Message = "User not found" });
 				}
 				if (!PasswordHasher.VerifyPassword(model.Password, user.Password))
 				{
 					return BadRequest(new { result = result, Message = "Password is incorrect" });
 				}
-
 				user.Token = createJwt(user);
-
 				var newAccessToken = user.Token;
 				var newRefreshToken = await CreateRefreshToken();
 				user.RefreshToken = newRefreshToken;
@@ -80,24 +76,20 @@ namespace Nybsys.Api.Controllers
 
 		[HttpPost("register")]
 		public async Task<IActionResult> Register([FromBody] User model)
-		{
-			
+		{		
 			bool result = false;
 			if (model == null)
 			{
 				return BadRequest();
 			}
-
 			if(await CheckUsernameExits(model.Username))
 			{
 				return BadRequest(new { Message = "Username Already exits" });
 
 			}
-
 			if (await CheckEmailExits(model.Email))
 			{
 				return BadRequest(new { Message = "Email Already exits" });
-
 			}
 
 			var pass = CheckPasswordStrength(model.Password);

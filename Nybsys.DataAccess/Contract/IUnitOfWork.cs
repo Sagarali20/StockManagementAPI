@@ -14,6 +14,8 @@ namespace Nybsys.DataAccess.Contracts2
 		ICategoryRepository Category { get; }	
 		IInventoryWarehouseRepository InventoryWarehouseDataAccess { get; }
 		ICustomerRepository CustomerDataAccess { get; }
-		Task CompleteAsync();
+		IInvoiceRepository InvoiceDataAccess { get; }
+		IInvoiceDetailsRepository InvoiceDetailsDataAccess { get; }
+        Task CompleteAsync();
 	}
 }
