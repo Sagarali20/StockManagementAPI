@@ -28,8 +28,9 @@ namespace Nybsys.Api.Controllers
 
             createInvoice.Invoice = new EntityModels.Invoice
             {
-                CreatedBy="",
-                CreatedDate=DateTime.UtcNow
+                CreatedBy=new Guid(),
+                CreatedDate=DateTime.UtcNow,
+                LastUpdatedBy=new Guid(),   
             };
             result = await _invoiceService.InsertInvoice(createInvoice.Invoice);
 
