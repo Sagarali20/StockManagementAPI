@@ -17,9 +17,10 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 //builder.Services.AddTransient<IDesignationRepository, DesignationRepository>();
 //builder.Services.AddTransient<IUserRepository, UserRepository>();
 //builder.Services.AddScoped<IUserLoginService, UserLoginService>();
-builder.Services.AddScoped<IInventoryService, InventoryService>();
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IInventoryService, InventoryService>();
+builder.Services.AddTransient<IInvoiceService, InvoiceService>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 // Add services to the container.
 

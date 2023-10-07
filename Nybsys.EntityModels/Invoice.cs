@@ -30,7 +30,11 @@ namespace Nybsys.EntityModels
         public DateTime LastUpdatedDate { get; set; }    
         public Guid LastUpdatedBy { get; set; }
         [NotMapped]
-        public string PaymentType { get; set; } 
+        public string PaymentType { get; set; }
+        [NotMapped]
+        public string Email { get; set; }
+        public List<InvoiceDetails> InvoiceDetails { get; set; }
+
 
     }
 }

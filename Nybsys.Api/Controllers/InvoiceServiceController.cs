@@ -30,20 +30,18 @@ namespace Nybsys.Api.Controllers
             {
                 CreatedBy=new Guid(),
                 CreatedDate=DateTime.UtcNow,
-                LastUpdatedBy=new Guid(),   
+                LastUpdatedBy=new Guid(),
+                Status="Intial"
             };
             result = await _invoiceService.InsertInvoice(createInvoice.Invoice);
 
-            
-
             createInvoice.Invoice.InvoiceId = createInvoice.Invoice.Id.GenerateInvoiceNo();
 
-
-            var model=0;
+            result = await _invoiceService.UpdateInvoice(createInvoice.Invoice);
 
             var res = new
             {
-                equipment = model
+                InvoiceId = createInvoice.Invoice.InvoiceId
             };
             return Ok(res);
         }
@@ -51,7 +49,6 @@ namespace Nybsys.Api.Controllers
         [Route("get-equ")]
         public async Task<IActionResult> AddInvoice(CreateInvoice createInvoice)
         {
-
 
             var model=0;
 

@@ -28,6 +28,8 @@ namespace DatabaseContext
 		public DbSet<Category> Categorys { get; set; }
 		public DbSet<InventoryWarehouse> InventoryWarehouses { get; set; }
 		public DbSet<Customer> Customers { get; set; }
+		public DbSet<Invoice> Invoices { get; set; }
+		public DbSet<InvoiceDetails> InvoiceDetails { get; set; }
 
 	}
 }

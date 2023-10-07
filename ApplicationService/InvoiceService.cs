@@ -28,5 +28,9 @@ namespace ApplicationService
         {
             return await _unitOfWork.InvoiceDataAccess.Add(invoice);
         }
+        public async Task<bool> UpdateInvoice(Invoice invoice)
+        {
+            return await _unitOfWork.InvoiceDataAccess.Update(invoice);
+        }
     }
 }

@@ -12,6 +12,6 @@ namespace ApplicationService.Contract
     {
         DataTable DataTable(DateTime dateTime);
         Task<bool> InsertInvoice(Invoice invoice);
-
+        Task<bool> UpdateInvoice(Invoice invoice);
     }
 }
