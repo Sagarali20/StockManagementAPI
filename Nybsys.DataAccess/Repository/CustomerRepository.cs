@@ -2,8 +2,8 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Nybsys.DataAccess.Contract;
-using Nybsys.EntityModels;
+using Inventory.DataAccess.Contract;
+using Inventory.EntityModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,11 +12,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Nybsys.DataAccess.Repository
+namespace Inventory.DataAccess.Repository
 {
 	public class CustomerRepository : GenericRepository<Customer>, ICustomerRepository
 	{
-		public CustomerRepository(NybsysDbContext dbContext, ILogger logger) : base(dbContext, logger)
+		public CustomerRepository(InventoryDbContext dbContext, ILogger logger) : base(dbContext, logger)
 		{
 
 		}
@@ -52,7 +52,7 @@ namespace Nybsys.DataAccess.Repository
             if (!string.IsNullOrWhiteSpace(filter.SearchText))
             {
                 filter.SearchText = HttpUtility.UrlDecode(filter.SearchText);
-                sqlSubQuery += " AND CHARINDEX(@SearchText,ct.SearchText) > 0";
+                sqlSubQuery += "AND CHARINDEX(@SearchText,ct.SearchText) > 0";
             }
             try
             {
@@ -66,9 +66,11 @@ namespace Nybsys.DataAccess.Repository
                     AddParameter(cmd, pInt32("pagesize", filter.PageSize));
                     AddParameter(cmd, pInt32("pageno", filter.PageNo));
                     if (!string.IsNullOrWhiteSpace(filter.SearchText))
-                        AddParameter(cmd, pNVarChar("SearchText", Uri.UnescapeDataString(filter.SearchText)));
 
-                    DataSet dsResult = GetDataSet(cmd);
+                        AddParameter(cmd, pNVarChar("SearchText", Uri.UnescapeDataString(filter.SearchText)));
+                        DataSet dsResult = GetDataSet(cmd);
+
+
                     return dsResult;
                 }
             }

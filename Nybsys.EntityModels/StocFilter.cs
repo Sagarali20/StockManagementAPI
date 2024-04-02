@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nybsys.EntityModels
+namespace Inventory.EntityModels
 {
     public class StocFilter
 	{ 

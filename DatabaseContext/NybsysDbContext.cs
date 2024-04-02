@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Nybsys.EntityModels;
-using Nybsys.EntityModels.Dto;
+using Inventory.EntityModels;
+using Inventory.EntityModels.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DatabaseContext
 {
-    public class NybsysDbContext : DbContext
+    public class InventoryDbContext : DbContext
     {
-        public NybsysDbContext(DbContextOptions<NybsysDbContext> options) : base(options)
+        public InventoryDbContext(DbContextOptions<InventoryDbContext> options) : base(options)
         {
 
         }

@@ -1,4 +1,4 @@
-namespace Nybsys.Api
+namespace Inventory.Api
 {
     public class WeatherForecast
     {

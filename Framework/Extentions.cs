@@ -628,7 +628,6 @@ namespace SERP.Framework
                         pro.SetValue(objT, row[pro.Name]);
                    
                 }
-
                 return objT;
             }).ToList();
 
@@ -714,6 +713,7 @@ namespace SERP.Framework
                 foreach (DataColumn DataColumn in datatable.Columns)
                     columnsNames.Add(DataColumn.ColumnName);
                 Temp = datatable.AsEnumerable().ToList().ConvertAll<T>(row => ToModel<T>(row, columnsNames));
+
                 return Temp;
             }
             catch { return Temp; }

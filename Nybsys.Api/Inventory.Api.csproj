@@ -19,11 +19,13 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Folder Include="Image\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ApplicationService\ApplicationService.csproj" />
     <ProjectReference Include="..\Framework\Framework.csproj" />
-    <ProjectReference Include="..\Nybsys.DataAccess\Nybsys.DataAccess.csproj" />
+    <ProjectReference Include="..\Nybsys.DataAccess\Inventory.DataAccess.csproj" />
+    <ProjectReference Include="..\Nybsys.EntityModels\Inventory.EntityModels.csproj" />
   </ItemGroup>
-
 </Project>

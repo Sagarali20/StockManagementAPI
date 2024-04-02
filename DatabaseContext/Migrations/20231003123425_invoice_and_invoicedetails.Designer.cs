@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DatabaseContext.Migrations
 {
-    [DbContext(typeof(NybsysDbContext))]
+    [DbContext(typeof(InventoryDbContext))]
     [Migration("20231003123425_invoice_and_invoicedetails")]
     partial class invoice_and_invoicedetails
     {
@@ -25,7 +25,7 @@ namespace DatabaseContext.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Nybsys.EntityModels.Category", b =>
+            modelBuilder.Entity("Inventory.EntityModels.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,7 +44,7 @@ namespace DatabaseContext.Migrations
                     b.ToTable("Categorys");
                 });
 
-            modelBuilder.Entity("Nybsys.EntityModels.Customer", b =>
+            modelBuilder.Entity("Inventory.EntityModels.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -108,7 +108,7 @@ namespace DatabaseContext.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("Nybsys.EntityModels.Employee", b =>
+            modelBuilder.Entity("Inventory.EntityModels.Employee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -140,7 +140,7 @@ namespace DatabaseContext.Migrations
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("Nybsys.EntityModels.Equipment", b =>
+            modelBuilder.Entity("Inventory.EntityModels.Equipment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -210,7 +210,7 @@ namespace DatabaseContext.Migrations
                     b.ToTable("Equipments");
                 });
 
-            modelBuilder.Entity("Nybsys.EntityModels.InventoryWarehouse", b =>
+            modelBuilder.Entity("Inventory.EntityModels.InventoryWarehouse", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -247,7 +247,7 @@ namespace DatabaseContext.Migrations
                     b.ToTable("InventoryWarehouses");
                 });
 
-            modelBuilder.Entity("Nybsys.EntityModels.Invoice", b =>
+            modelBuilder.Entity("Inventory.EntityModels.Invoice", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -305,7 +305,7 @@ namespace DatabaseContext.Migrations
                     b.ToTable("Invoices");
                 });
 
-            modelBuilder.Entity("Nybsys.EntityModels.InvoiceDetails", b =>
+            modelBuilder.Entity("Inventory.EntityModels.InvoiceDetails", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -342,7 +342,7 @@ namespace DatabaseContext.Migrations
                     b.ToTable("InvoiceDetails");
                 });
 
-            modelBuilder.Entity("Nybsys.EntityModels.User", b =>
+            modelBuilder.Entity("Inventory.EntityModels.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

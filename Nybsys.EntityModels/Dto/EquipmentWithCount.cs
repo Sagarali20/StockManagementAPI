@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nybsys.EntityModels.Dto
+namespace Inventory.EntityModels.Dto
 {
 	public class EquipmentWithCount
 	{

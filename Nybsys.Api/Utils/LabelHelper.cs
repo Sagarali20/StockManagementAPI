@@ -1,8 +1,8 @@
-﻿namespace Nybsys.Api.Utils
+﻿namespace Inventory.Api.Utils
 {
     public static  class LabelHelper
     {
-        public static class NybsysApiHelper
+        public static class InventoryApiHelper
         {
             public const string SaveEmployee = "save-employee";
             public const string UpdateEmployee = "update-employee";

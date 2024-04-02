@@ -6,11 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nybsys.EntityModels
+namespace Inventory.EntityModels
 {
     public class InvoiceDetails
     {
         [Key]
+
         public int Id { get; set; }
         [Column(TypeName = "NVARCHAR(50)")]
         public string InvoieId { get; set; }    

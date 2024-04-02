@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nybsys.DataAccess.Contract
+namespace Inventory.DataAccess.Contract
 {
     public interface IInvoiceDetailsRepository
     {

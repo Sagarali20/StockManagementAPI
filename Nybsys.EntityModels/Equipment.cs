@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nybsys.EntityModels
+namespace Inventory.EntityModels
 {
 	public class Equipment
 	{
@@ -17,7 +17,6 @@ namespace Nybsys.EntityModels
 		[Column(TypeName = "NVARCHAR(250)")]
 		public string Name { get; set; }	
 		public string Description { get; set; }
-
 		[Column(TypeName = "NVARCHAR(250)")]
 		public string SKU { get; set; }
 		public double Retail { get; set; }

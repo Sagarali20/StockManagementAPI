@@ -1,6 +1,6 @@
-﻿using Nybsys.DataAccess.Contracts2;
-using Nybsys.EntityModels;
-using Nybsys.EntityModels.Dto;
+﻿using Inventory.DataAccess.Contracts2;
+using Inventory.EntityModels;
+using Inventory.EntityModels.Dto;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -61,13 +61,10 @@ namespace ApplicationService
                                                         CustomerId = (Guid)dr["CustomerId"]
                                                     }).ToList();
                 //equipmentWithCount.Count = ds.Tables[1].Rows[0]["TotalCount"] != DBNull.Value ? Convert.ToInt32(ds.Tables[1].Rows[0]["TotalCount"]) : 0;
-
                 customerWithCount.Count = ds.Tables[1].Rows.Count > 0 ?
                                    (int)ds.Tables[1].Rows[0]["TotalCount"] : 0;
 
             }
-
-
             return customerWithCount;
 
         }

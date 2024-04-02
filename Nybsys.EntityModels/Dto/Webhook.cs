@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Inventory.EntityModels.Dto
 {
-    public class CustomerWithCount
+    public class Webhook
     {
-        public List<Customer> Customerlist { get; set; }
-        public int Count { get; set; }
+        public int Id { get; set; }     
+        public string Name { get; set; }
     }
 }

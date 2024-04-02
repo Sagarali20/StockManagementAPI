@@ -3,10 +3,10 @@ using ApplicationService.Contract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
-using Nybsys.DataAccess.Contracts2;
-using Nybsys.EntityModels;
+using Inventory.DataAccess.Contracts2;
+using Inventory.EntityModels;
 
-namespace Nybsys.Api.Controllers
+namespace Inventory.Api.Controllers
 {
 	[Route("api/customer")]
 	[ApiController]
@@ -32,9 +32,7 @@ namespace Nybsys.Api.Controllers
 				{
 					value.LastUpdateDate = DateTime.UtcNow;
 					value.LastCreatedBy = new Guid();
-
 					result = await _customerService.UpdateCustomer(value);
-
 				}
 				else
 				{
@@ -44,16 +42,13 @@ namespace Nybsys.Api.Controllers
 					value.JoinDate = DateTime.UtcNow;
 					value.CreatedBy = new Guid();
 					result = await _customerService.InsertCustomer(value);
-
 				}
 			}
-
 			var res = new
 			{
 				result = result,
 				model = value
 			};
-
 			return Ok(res);
 
 		}
@@ -83,7 +78,6 @@ namespace Nybsys.Api.Controllers
             {
                 return NotFound();
             }
-
             var res = new
             {
                 customer = model
@@ -99,9 +93,7 @@ namespace Nybsys.Api.Controllers
             filter.PageNo= 1;
             filter.PageSize = 10;
             filter.SearchText= searchText;
-
             var customer = _customerService.GetAllCustomer(filter);
-
             var res = new
             {
                 customers = customer.Customerlist,

@@ -1,20 +1,20 @@
 ﻿using DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Nybsys.DataAccess.Contract;
-using Nybsys.DataAccess.Contracts2;
-using Nybsys.EntityModels;
+using Inventory.DataAccess.Contract;
+using Inventory.DataAccess.Contracts2;
+using Inventory.EntityModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nybsys.DataAccess.Repository
+namespace Inventory.DataAccess.Repository
 {
 	public class InventoryWarehouseRepository : GenericRepository<InventoryWarehouse>, IInventoryWarehouseRepository
 	{
-		public InventoryWarehouseRepository(NybsysDbContext dbContext, ILogger logger) : base(dbContext, logger)
+		public InventoryWarehouseRepository(InventoryDbContext dbContext, ILogger logger) : base(dbContext, logger)
 		{
 
 		}

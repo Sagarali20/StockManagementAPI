@@ -2,7 +2,7 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Nybsys.DataAccess.Contracts2;
+using Inventory.DataAccess.Contracts2;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,18 +13,18 @@ using System.Threading.Tasks;
 using System.Transactions;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
-namespace Nybsys.DataAccess.Repository
+namespace Inventory.DataAccess.Repository
 {
 	public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
 	{
 
-		protected NybsysDbContext _dbContext;
+		protected InventoryDbContext _dbContext;
 		internal DbSet<T> _dbSet;
 		protected readonly ILogger _logger;
 		private readonly string connnection;
 		private SqlConnection _DBConnection = new SqlConnection(); 
 
-		public GenericRepository(NybsysDbContext dbContext, ILogger logger)
+		public GenericRepository(InventoryDbContext dbContext, ILogger logger)
 		{
 			_dbContext = dbContext;
 			_logger= logger;
@@ -54,7 +54,7 @@ namespace Nybsys.DataAccess.Repository
 		    await _dbSet.AddAsync(entity);
 			return await _dbContext.SaveChangesAsync() > 0;
 		}
-		public virtual  async  Task<bool>  Update(T entity)
+		public virtual  async  Task<bool> Update(T entity)
 		{	
 			_dbSet.Update(entity);
 			return await _dbContext.SaveChangesAsync() > 0;
@@ -123,7 +123,6 @@ namespace Nybsys.DataAccess.Repository
 		{
 			DataSet dataset = new DataSet();
 			dataset.Tables.Add(new DataTable(tablename));
-
 			SqlDataAdapter dataadapter = new SqlDataAdapter(command);
 			dataadapter.Fill(dataset, tablename);
 			return dataset;

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Nybsys.Api.Controllers
+namespace Inventory.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]

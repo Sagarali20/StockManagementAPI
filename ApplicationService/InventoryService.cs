@@ -1,6 +1,6 @@
-﻿using Nybsys.DataAccess.Contracts2;
-using Nybsys.EntityModels;
-using Nybsys.EntityModels.Dto;
+﻿using Inventory.DataAccess.Contracts2;
+using Inventory.EntityModels;
+using Inventory.EntityModels.Dto;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -123,7 +123,6 @@ namespace ApplicationService
 							RepCost = dr["RepCost"] != DBNull.Value ? Convert.ToDouble(dr["RepCost"]) : 0,
 							EquipmentId = (Guid)dr["EquipmentId"],
 							CategoryId = (Guid)dr["CategoryId"],
-
 						}).ToList();
 				//equipmentWithCount.Count = ds.Tables[1].Rows[0]["TotalCount"] != DBNull.Value ? Convert.ToInt32(ds.Tables[1].Rows[0]["TotalCount"]) : 0;
 
@@ -159,14 +158,11 @@ namespace ApplicationService
 		}
 		public async Task<List<InventoryWarehouse>> GetAllInventoryWarehouseByGuidId(Guid id)
 		{
-
 			var dr = await _unitOfWork.InventoryWarehouseDataAccess.GetAllByGuidId(id);
-
 			foreach (var item in dr)
 			{
 				item.LastUpdatedDate = item.LastUpdatedDate.UTCToClientTime();
 			}
-
 			return dr.ToList();
 		}
 

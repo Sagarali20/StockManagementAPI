@@ -1,5 +1,5 @@
-﻿using Nybsys.EntityModels;
-using Nybsys.EntityModels.Dto;
+﻿using Inventory.EntityModels;
+using Inventory.EntityModels.Dto;
 using System;
 using System.Collections.Generic;
 using System.Data;

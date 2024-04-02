@@ -1,18 +1,18 @@
 ﻿using DatabaseContext;
 using Microsoft.Extensions.Logging;
-using Nybsys.DataAccess.Contract;
-using Nybsys.EntityModels;
+using Inventory.DataAccess.Contract;
+using Inventory.EntityModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nybsys.DataAccess.Repository
+namespace Inventory.DataAccess.Repository
 {
     public class InvoiceRepository : GenericRepository<Invoice>, IInvoiceRepository
     {
-        public InvoiceRepository(NybsysDbContext dbContext, ILogger logger) : base(dbContext, logger)
+        public InvoiceRepository(InventoryDbContext dbContext, ILogger logger) : base(dbContext, logger)
         {
         }
     }

@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nybsys.Api", "Nybsys.Api\Nybsys.Api.csproj", "{A25C6FE4-64DF-404F-9D53-6DE673165A4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.Api", "Nybsys.Api\Inventory.Api.csproj", "{A25C6FE4-64DF-404F-9D53-6DE673165A4A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NybsysDataAccess", "NybsysDataAccess", "{4F4D6EFB-6B3E-4E8F-932B-8863E79EF426}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InventoryDataAccess", "InventoryDataAccess", "{4F4D6EFB-6B3E-4E8F-932B-8863E79EF426}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseContext", "DatabaseContext", "{2E2FB72C-D62A-4A9A-9D97-4D02FC27B9D4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EntityModels", "EntityModels", "{3DA95F22-3539-4F29-8183-D934685EFA59}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nybsys.DataAccess", "Nybsys.DataAccess\Nybsys.DataAccess.csproj", "{67C0F0C9-A2FA-4E7D-A5CD-50D7A1663A14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.DataAccess", "Nybsys.DataAccess\Inventory.DataAccess.csproj", "{67C0F0C9-A2FA-4E7D-A5CD-50D7A1663A14}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nybsys.EntityModels", "Nybsys.EntityModels\Nybsys.EntityModels.csproj", "{49B33673-AC68-49D9-A74B-66B139E472D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.EntityModels", "Nybsys.EntityModels\Inventory.EntityModels.csproj", "{49B33673-AC68-49D9-A74B-66B139E472D6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseContext", "DatabaseContext\DatabaseContext.csproj", "{094D03F4-6995-448B-AD94-C28468FD7C40}"
 EndProject
@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationService", "Appli
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationService", "ApplicationService\ApplicationService.csproj", "{A2361C86-0667-484F-AF54-DB866A554684}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Framework\Framework.csproj", "{F44A269E-8CA8-4DA0-B115-74F7428B65AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework", "Framework\Framework.csproj", "{F44A269E-8CA8-4DA0-B115-74F7428B65AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

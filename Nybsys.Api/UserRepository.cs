@@ -25,9 +25,7 @@ namespace Inventory.DataAccess.Repository
 
         public bool InsertData(Webhook model)
         {
-
 			string query = "";
-
 			return true;
         }
 

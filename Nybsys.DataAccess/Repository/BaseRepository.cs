@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nybsys.DataAccess.Repository
+namespace Inventory.DataAccess.Repository
 {
     public abstract class BaseRepository<T> where T : class
     { 
-        private readonly NybsysDbContext _db;
-        public BaseRepository(NybsysDbContext nybsysDbContext)
+        private readonly InventoryDbContext _db;
+        public BaseRepository(InventoryDbContext InventoryDbContext)
         {
-            _db = nybsysDbContext;
+            _db = InventoryDbContext;
         }
         public  DbSet<T> Table
         {

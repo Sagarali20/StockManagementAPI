@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,8 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Framework\Framework.csproj" />
-    <ProjectReference Include="..\Nybsys.DataAccess\Nybsys.DataAccess.csproj" />
-    <ProjectReference Include="..\Nybsys.EntityModels\Nybsys.EntityModels.csproj" />
+    <ProjectReference Include="..\Nybsys.DataAccess\Inventory.DataAccess.csproj" />
+    <ProjectReference Include="..\Nybsys.EntityModels\Inventory.EntityModels.csproj" />
   </ItemGroup>
-
 </Project>

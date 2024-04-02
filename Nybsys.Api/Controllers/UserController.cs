@@ -1,25 +1,24 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Nybsys.Api.Utils;
-using Nybsys.DataAccess.Repository;
-using Nybsys.EntityModels;
+using Inventory.Api.Utils;
+using Inventory.DataAccess.Repository;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Text.RegularExpressions;
-using User = Nybsys.EntityModels.User;
+using User = Inventory.EntityModels.User;
 using System;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Cryptography;
-using Nybsys.EntityModels.Dto;
+using Inventory.EntityModels.Dto;
 using Azure.Core;
 using System.Reflection.Metadata.Ecma335;
 using ApplicationService;
-using Nybsys.DataAccess.Contracts2;
+using Inventory.DataAccess.Contracts2;
 
-namespace Nybsys.Api.Controllers
+namespace Inventory.Api.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
@@ -40,8 +39,10 @@ namespace Nybsys.Api.Controllers
 			}
 			try
 			{
-				List<User> asds = await _userLoginService.GetAllUser();
-				 var user=  asds.FirstOrDefault(x => x.Username == model.Username);
+
+				List<User> asds = await _userLoginService.GetAllUser();	
+				
+				var user=  asds.FirstOrDefault(x => x.Username == model.Username);
 				if (user == null)
 				{
 					return NotFound(new { result = result, Message = "User not found" });
@@ -56,7 +57,6 @@ namespace Nybsys.Api.Controllers
 				user.RefreshToken = newRefreshToken;
 				user.RefreshTokenExpiretime = DateTime.Now.AddDays(5);
 				result = await _userLoginService.UpdateUser(user);
-
 				//return Ok(new {token=model.Token, result =true, Message = "login success"});
 				return Ok(new TokenApiDto()
 				{
@@ -99,8 +99,6 @@ namespace Nybsys.Api.Controllers
 
 			}
 			
-
-
 			string Message = "";
 			try
 			{
@@ -190,8 +188,8 @@ namespace Nybsys.Api.Controllers
 			var tokenDescriptor = new SecurityTokenDescriptor
 			{
 				Subject = identity,
-				//Expires = DateTime.Now.AddDays(1),
-				Expires = DateTime.Now.AddSeconds(10),
+				Expires = DateTime.Now.AddDays(1),
+				//Expires = DateTime.Now.AddSeconds(10),
 				SigningCredentials = credentials
 			};
 
@@ -203,7 +201,6 @@ namespace Nybsys.Api.Controllers
 		{
 			var tokenBytes = RandomNumberGenerator.GetBytes(64);
 			var RefreshToken =  Convert.ToBase64String(tokenBytes);
-
 			List<User> model = await _userLoginService.GetAllUser();
 			var tokeninuser = model.FirstOrDefault(x => x.RefreshToken == RefreshToken);
 			if(tokeninuser !=null)
@@ -244,7 +241,7 @@ namespace Nybsys.Api.Controllers
 			string accesstoken = TokenApiModel.AccessToken;
 			string refreshtoken = TokenApiModel.RefreshToken;
 			var pricipal = GetPrincipleFromExpiredToken(accesstoken);
-			var username = pricipal.Identity.Name;
+			var username = pricipal.Identity.Name;  
 			List<User> model = await _userLoginService.GetAllUser();
 			var user = model.FirstOrDefault(x => x.Username == username);
 			if (user is null || user.RefreshToken != refreshtoken || user.RefreshTokenExpiretime <= DateTime.Now)

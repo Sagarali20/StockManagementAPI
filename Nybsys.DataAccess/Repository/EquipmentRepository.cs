@@ -3,9 +3,9 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
-using Nybsys.DataAccess.Contract;
-using Nybsys.DataAccess.Contracts2;
-using Nybsys.EntityModels;
+using Inventory.DataAccess.Contract;
+using Inventory.DataAccess.Contracts2;
+using Inventory.EntityModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -15,11 +15,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Nybsys.DataAccess.Repository
+namespace Inventory.DataAccess.Repository
 {
 	public class EquipmentRepository : GenericRepository<Equipment>, IEquipmentRepository
 	{
-		public EquipmentRepository(NybsysDbContext dbContext, ILogger logger ) : base(dbContext,logger)
+		public EquipmentRepository(InventoryDbContext dbContext, ILogger logger ) : base(dbContext,logger)
 		{
 
 		}

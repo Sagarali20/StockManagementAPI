@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Nybsys.Api": {
+    "Inventory.Api": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

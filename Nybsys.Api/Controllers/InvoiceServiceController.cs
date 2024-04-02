@@ -1,10 +1,10 @@
 ﻿using ApplicationService.Contract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Nybsys.EntityModels.Dto;
+using Inventory.EntityModels.Dto;
 using SERP.Framework;
 
-namespace Nybsys.Api.Controllers
+namespace Inventory.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -51,7 +51,6 @@ namespace Nybsys.Api.Controllers
         {
 
             var model=0;
-
             var res = new
             {
                 equipment = model

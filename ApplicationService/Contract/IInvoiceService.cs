@@ -1,4 +1,4 @@
-﻿using Nybsys.EntityModels;
+﻿using Inventory.EntityModels;
 using System;
 using System.Collections.Generic;
 using System.Data;

@@ -1,6 +1,6 @@
 ﻿
 using System.Security.Cryptography;
-namespace Nybsys.Api.Utils
+namespace Inventory.Api.Utils
 {
 	public class PasswordHasher
 	{
@@ -20,12 +20,9 @@ namespace Nybsys.Api.Utils
 			var hashBytes= new byte[SaltSize+ HashSize];
 			Array.Copy(salt, 0, hashBytes, 0, SaltSize);
 			Array.Copy(hash, 0, hashBytes, SaltSize, HashSize);
-
 			var base64hash=Convert.ToBase64String(hashBytes);
 			return base64hash;
-
 		}
-
 		public static bool VerifyPassword(string password,string base64hash)
 		{ 	
 		 var hashBytes= Convert.FromBase64String(base64hash);
@@ -33,7 +30,6 @@ namespace Nybsys.Api.Utils
 			Array.Copy(hashBytes,0, salt, 0, SaltSize);
 			var key = new Rfc2898DeriveBytes(password, salt, Iteration);
 			byte[] hash = key.GetBytes(HashSize);
-
 			for (var i = 0; i < HashSize; i++)
 			{
 				if (hashBytes[i+SaltSize] != hash[i])
@@ -42,7 +38,6 @@ namespace Nybsys.Api.Utils
 				}
 			}
 			return true;
-
 		}
 
 	}

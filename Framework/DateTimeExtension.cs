@@ -25,21 +25,15 @@ namespace Framework
 
 		public static DateTime UTCToClientTime(this DateTime datetime)
 		{
-
     		// Get the user's time zone or a specific time zone
 			TimeZoneInfo userTimeZone = TimeZoneInfo.Local;
 			// Convert UTC time to local time
 			DateTime localTime = TimeZoneInfo.ConvertTimeFromUtc(datetime, userTimeZone);
-
 			return localTime;
-
 		}
 		public static DateTime CurrentUtcTime()
-		{
-			DateTime Utc = DateTime.UtcNow;
-
-			return Utc;
-
+		{			
+			return DateTime.UtcNow;
 		}
 
 

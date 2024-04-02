@@ -1,12 +1,13 @@
 ﻿using ApplicationService.Contract;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Nybsys.DataAccess.Contracts2;
-using Nybsys.EntityModels;
+using Inventory.DataAccess.Contracts2;
+using Inventory.EntityModels;
 using System.Data;
 using System.Xml;
+using Microsoft.AspNetCore.Authorization;
 
-namespace Nybsys.Api.Controllers
+namespace Inventory.Api.Controllers
 {
 
 
@@ -28,7 +29,7 @@ namespace Nybsys.Api.Controllers
 		  var equipment  =await _inventoryService.GetAllEquipment();
 			return Ok(new { equipment = equipment });
 		}
-
+		[Authorize]
 		[HttpPost]
 		[Route("get-equipment-by-id")]
 		public async Task<IActionResult> Get(int id)
@@ -38,17 +39,14 @@ namespace Nybsys.Api.Controllers
 			{
 				return NotFound();
 			}
-
 			var res = new
 			{ 
 				equipment = model
 			};
 			return Ok(res);
 		}
-
 		[HttpPost]
 		[Route("add-equipment")]
-
 		public async Task<IActionResult> AddEquipment([FromBody] Equipment value)
 		{
 			bool result = false;
@@ -59,9 +57,7 @@ namespace Nybsys.Api.Controllers
 				{
 					value.LastUpdatedDate = DateTime.UtcNow;
 					value.LastUpdatedBy = new Guid();
-
 					result = await _inventoryService.UpdateEquipment(value);
-
 				}
 				else
 				{
@@ -71,18 +67,14 @@ namespace Nybsys.Api.Controllers
 					value.CreatedBy = new Guid();
 					value.LastUpdatedBy = new Guid();
 					result = await _inventoryService.InsertEquipment(value);
-
 				}
 			}
-
 			var res = new
 			{
 				result = result,
 				model = value
 			};
-
 			return Ok(res);
-
 		}
 		[HttpPost]
 		[Route("getall-equipment")]
@@ -90,18 +82,15 @@ namespace Nybsys.Api.Controllers
 		{
 			var equipment = _inventoryService.GetAllEquipment(value);
 
-
 			var res = new
 			{
 				equipmentlist = equipment.EquipmentList,
 				Count = equipment.Count,
 				result = true,
 			};
-
 			return Ok(res);
 
 		}
-
 		[HttpPost]
 		[Route("delete-equipment")]
 		public async Task<IActionResult> DeleteEquipment(int id)
@@ -137,8 +126,6 @@ namespace Nybsys.Api.Controllers
 
 			}
 			//}
-
-
 			return Ok();
 		}
 
@@ -187,7 +174,6 @@ namespace Nybsys.Api.Controllers
 			if (Category == null)
 			{
 				return NotFound();
-
 			}
 			result = await _inventoryService.DeleteCategory(Category);
 
@@ -225,7 +211,6 @@ namespace Nybsys.Api.Controllers
 
 		[HttpPost]
 		[Route("add-inventory-warehouse")]
-
 		public async Task<IActionResult> AddEquipment([FromBody] InventoryWarehouse value)
 		{
 
@@ -249,9 +234,6 @@ namespace Nybsys.Api.Controllers
 			return Ok(res);
 
 		}
-
-
-
 
 	}
 }
