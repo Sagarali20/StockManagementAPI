@@ -30,7 +30,7 @@ namespace Inventory.Api.Controllers
 			_userLoginService = new UserLoginService(unitOfWork);
 		}
 		[HttpPost("authenticate")]
-		public async Task<IActionResult> Authenticate([FromBody] User model)
+		public async Task<IActionResult> Authenticate([FromBody] AuthUser model)
 		{
 			bool result = false;
 			if (model == null)

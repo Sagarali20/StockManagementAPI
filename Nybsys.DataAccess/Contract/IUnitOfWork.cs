@@ -14,7 +14,7 @@ namespace Inventory.DataAccess.Contracts2
 		ICategoryRepository Category { get; }	
 		IInventoryWarehouseRepository InventoryWarehouseDataAccess { get; }
 		ICustomerRepository CustomerDataAccess { get; }
-		IInvoiceRepository InvoiceDataAccess { get; }
+		IInvoiceRepository InvoiceDataAccess { get; }  
 		IInvoiceDetailsRepository InvoiceDetailsDataAccess { get; }
         Task CompleteAsync();
 	}

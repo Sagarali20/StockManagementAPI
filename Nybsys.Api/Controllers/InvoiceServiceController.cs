@@ -18,14 +18,12 @@ namespace Inventory.Api.Controllers
             _invoiceService = inventoryService;
         }
 
-
         [HttpPost]
         [Route("get-invoice-id")]
         public async Task<IActionResult> AddInvoice()
         {
             bool result = false; 
-             CreateInvoice createInvoice = new CreateInvoice();
-
+            CreateInvoice createInvoice = new CreateInvoice();
             createInvoice.Invoice = new EntityModels.Invoice
             {
                 CreatedBy=new Guid(),
@@ -34,22 +32,19 @@ namespace Inventory.Api.Controllers
                 Status="Intial"
             };
             result = await _invoiceService.InsertInvoice(createInvoice.Invoice);
-
             createInvoice.Invoice.InvoiceId = createInvoice.Invoice.Id.GenerateInvoiceNo();
-
-            result = await _invoiceService.UpdateInvoice(createInvoice.Invoice);
-
+            result = await _invoiceService.UpdateInvoice(createInvoice.Invoice); 
             var res = new
             {
                 InvoiceId = createInvoice.Invoice.InvoiceId
             };
+            
             return Ok(res);
         }
         [HttpPost]
         [Route("get-equ")]
         public async Task<IActionResult> AddInvoice(CreateInvoice createInvoice)
         {
-
             var model=0;
             var res = new
             {

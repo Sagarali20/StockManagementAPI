@@ -6,13 +6,15 @@ using Inventory.EntityModels;
 using System.Data;
 using System.Xml;
 using Microsoft.AspNetCore.Authorization;
+using System.Drawing;
+using System;
+using Inventory.Api.Utils;
 
 namespace Inventory.Api.Controllers
 {
 
 
     [Route("api/inventory")]
-
 	[ApiController]
 	public class InventoryController : ControllerBase
 	{
@@ -26,7 +28,7 @@ namespace Inventory.Api.Controllers
 		[Route("getall-equipment")]
 		public async Task<IActionResult> Get()
 		{
-		  var equipment  =await _inventoryService.GetAllEquipment();
+          var equipment  =await _inventoryService.GetAllEquipment();
 			return Ok(new { equipment = equipment });
 		}
 		[Authorize]
@@ -50,9 +52,8 @@ namespace Inventory.Api.Controllers
 		public async Task<IActionResult> AddEquipment([FromBody] Equipment value)
 		{
 			bool result = false;
-
 			if(value !=null)
-			{
+			{ 
 				if (value.Id > 0)
 				{
 					value.LastUpdatedDate = DateTime.UtcNow;
@@ -74,22 +75,20 @@ namespace Inventory.Api.Controllers
 				result = result,
 				model = value
 			};
-			return Ok(res);
+			return Ok(res); 
 		}
 		[HttpPost]
 		[Route("getall-equipment")]
 		public async Task<IActionResult>GetAllEquipment(StocFilter value)
 		{
-			var equipment = _inventoryService.GetAllEquipment(value);
-
+			var equipment =  _inventoryService.GetAllEquipment(value);
 			var res = new
 			{
 				equipmentlist = equipment.EquipmentList,
 				Count = equipment.Count,
-				result = true,
+				result = true			
 			};
 			return Ok(res);
-
 		}
 		[HttpPost]
 		[Route("delete-equipment")]
@@ -108,8 +107,6 @@ namespace Inventory.Api.Controllers
 			};
 			return Ok(res);
 		}
-
-
 		[HttpPatch()]
 		public async Task<IActionResult> UpdateDeriver(Equipment Equipment)
 		{
@@ -123,7 +120,7 @@ namespace Inventory.Api.Controllers
 			}
 			catch (Exception ex)
 			{
-
+               
 			}
 			//}
 			return Ok();
@@ -132,7 +129,7 @@ namespace Inventory.Api.Controllers
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> DeleteDriver(int id)
 		{
-			var model = await _inventoryService.GetEquipmentById(id);
+			var model = await _inventoryService.GetEquipmentById(id);   
 			if (model == null)
 			{
 				return NotFound();
@@ -148,19 +145,16 @@ namespace Inventory.Api.Controllers
 			bool result = false;
 			value.CategoryId = Guid.NewGuid();
 			result = await _inventoryService.InsertCategory(value);
-
 			var model = new
 			{
 				result = result
 			};
-
 			return Ok(model);
 		}
 		[HttpGet("getallcategory")]
 		public async Task<IActionResult> GetAllCategory()
 		{
 			var allCategory = await _inventoryService.GetAllCategory();
-
 			return Ok(new { category = allCategory });
 		}
 
@@ -169,14 +163,12 @@ namespace Inventory.Api.Controllers
 		{
 
 			bool result = false;
-
 			var Category = await _inventoryService.GetCategoryById(id);
 			if (Category == null)
 			{
 				return NotFound();
 			}
 			result = await _inventoryService.DeleteCategory(Category);
-
 			var model = new { 		
 				result = result 
 			};
@@ -213,26 +205,23 @@ namespace Inventory.Api.Controllers
 		[Route("add-inventory-warehouse")]
 		public async Task<IActionResult> AddEquipment([FromBody] InventoryWarehouse value)
 		{
-
             bool result = false;
 			if (value != null)
 			{
 				if(value.Type=="Damage")
 				{
 					value.Quantity = -value.Quantity;
-
 				}
-					value.LastUpdatedDate = DateTime.UtcNow;
-					value.LastUpdatedBy = new Guid();
-					result = await _inventoryService.InsertInventoryWarehouse(value);				
+			value.LastUpdatedDate = DateTime.UtcNow;
+		    value.LastUpdatedBy = new Guid();
+			result = await _inventoryService.InsertInventoryWarehouse(value);				
 			}
 			var res = new
 			{
 				result = result,
-				model = value
-			};
-			return Ok(res);
-
+                model = value
+            };
+            return Ok(res);
 		}
 
 	}

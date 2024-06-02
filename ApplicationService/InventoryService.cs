@@ -18,10 +18,8 @@ namespace ApplicationService
 
 		public InventoryService(IUnitOfWork unitOfWork) 
 		{
-			_unitOfWork = unitOfWork;
-		
+			_unitOfWork = unitOfWork;		
 		}
-
         public async Task<bool> InsertEquipment(Equipment Equipment)
 		{
 			return await _unitOfWork.EquipmentDataAccess.Add(Equipment);
@@ -64,7 +62,7 @@ namespace ApplicationService
 			return await _unitOfWork.EquipmentDataAccess.GetById(id);
 		}
 		//public List<Equipment> GetAllEquipment(StocFilter filter)
-		//{
+		//{l
 		//	  List<Equipment> list = new List<Equipment>();
 		//	  DataSet ds=_unitOfWork.EquipmentDataAccess.GetAllEquipmentFilter(filter);
 		//	if (ds != null)
@@ -90,12 +88,9 @@ namespace ApplicationService
 		//					CategoryId = (Guid)dr["CategoryId"],
 
 		//				}).ToList();
-
 		//	}
 
-		//	return list;
-				
-			
+		//	return list;							
 		//}
 
 		public EquipmentWithCount GetAllEquipment(StocFilter filter)
@@ -127,23 +122,15 @@ namespace ApplicationService
 				//equipmentWithCount.Count = ds.Tables[1].Rows[0]["TotalCount"] != DBNull.Value ? Convert.ToInt32(ds.Tables[1].Rows[0]["TotalCount"]) : 0;
 
 				equipmentWithCount.Count = ds.Tables[1].Rows.Count > 0 ?
-								   (int)ds.Tables[1].Rows[0]["TotalCount"] : 0;
+					(int)ds.Tables[1].Rows[0]["TotalCount"] : 0;
 				//equipmentWithCount.Count=
-
 			}
-
 			return equipmentWithCount;
-
-
 		}
-
-
 		public DataTable datalldatatable(StocFilter filter)
 		{
 			DataSet ds = _unitOfWork.EquipmentDataAccess.GetAllEquipmentFilter(filter);
-
-		  return ds.Tables[0];
-
+		    return ds.Tables[0];  
 		}
 
 		public async Task<bool> InsertInventoryWarehouse(InventoryWarehouse InventoryWarehouse)
@@ -153,7 +140,6 @@ namespace ApplicationService
 		public async Task<List<InventoryWarehouse>> GetAllInventoryWarehouse()
 		{
 			var dr = await _unitOfWork.InventoryWarehouseDataAccess.GetAll();
-
 			return dr.ToList();
 		}
 		public async Task<List<InventoryWarehouse>> GetAllInventoryWarehouseByGuidId(Guid id)

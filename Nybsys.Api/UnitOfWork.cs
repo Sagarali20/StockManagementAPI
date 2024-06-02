@@ -28,11 +28,11 @@ namespace Inventory.Api
 			var _logger = logger.CreateLogger(categoryName: "logs");
 			User = new UserRepository(_Context, _logger);
 			EquipmentDataAccess = new EquipmentRepository(_Context, _logger) ;
-			Category = new CategoryRepository(_Context, _logger) ;
+			Category = new CategoryRepository(_Context, _logger);
 			InventoryWarehouseDataAccess = new InventoryWarehouseRepository(_Context, _logger);
-			CustomerDataAccess = new CustomerRepository(_Context, _logger) ;
-            InvoiceDataAccess = new InvoiceRepository(_Context, _logger) ;
-			CustomerDataAccess = new CustomerRepository(_Context, _logger) ;
+			CustomerDataAccess = new CustomerRepository(_Context, _logger);
+            InvoiceDataAccess = new InvoiceRepository(_Context, _logger);
+			CustomerDataAccess = new CustomerRepository(_Context, _logger);
 		}
         public void Dispose()
 		{
